@@ -3,19 +3,21 @@
 [![tag](https://img.shields.io/github/tag/talav/openapi.svg)](https://github.com/talav/openapi/tags)
 [![Go Reference](https://pkg.go.dev/badge/github.com/talav/openapi.svg)](https://pkg.go.dev/github.com/talav/openapi)
 [![Go Report Card](https://goreportcard.com/badge/github.com/talav/openapi)](https://goreportcard.com/report/github.com/talav/openapi)
+[![CI](https://github.com/talav/openapi/actions/workflows/openapi-ci.yml/badge.svg)](https://github.com/talav/openapi/actions)
+[![codecov](https://codecov.io/gh/talav/openapi/graph/badge.svg)](https://codecov.io/gh/talav/openapi)
 [![License](https://img.shields.io/github/license/talav/openapi)](./LICENSE)
 
 Automatic OpenAPI 3.0.4 and 3.1.2 specification generation for Go applications.
 
 ## Features
 
-- **Type-Driven** - Define structs, get OpenAPI specs automatically
-- **OpenAPI 3.0.4 and 3.1.2** - Support for both major versions
-- **Rich Metadata** - Six tag systems for complete control
-- **Validation Integration** - Transform validation rules into schema constraints
-- **Security Schemes** - Built-in support for all OpenAPI auth types
-- **Examples** - Auto-generate or provide custom examples
-- **Extensible** - Hooks for custom schema transformations
+- Type-Driven - Define structs, get OpenAPI specs automatically
+- OpenAPI 3.0.4 and 3.1.2 - Support for both major versions
+- Rich Metadata - Six tag systems for complete control
+- Validation Integration - Transform validation rules into schema constraints
+- Security Schemes - Built-in support for all OpenAPI auth types
+- Examples - Auto-generate or provide custom examples
+- Extensible - Hooks for custom schema transformations
 
 ## Installation
 
@@ -173,15 +175,6 @@ Contributions are welcome! Please:
 6. Commit with clear messages
 7. Open a Pull Request
 
-See [.cursorrules](.cursorrules) for coding standards.
-
 ## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-Built on top of:
-- [talav/schema](https://github.com/talav/schema) - HTTP request decoding
-- [talav/tagparser](https://github.com/talav/tagparser) - Struct tag parsing
-- [jsonschema/v6](https://github.com/santhosh-tekuri/jsonschema) - Spec validation
