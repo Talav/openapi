@@ -7,6 +7,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/talav/openapi/config"
 )
 
 // normalizeJSON normalizes JSON by unmarshaling and remarshaling to ensure consistent formatting.
@@ -1880,4 +1881,865 @@ func TestGenerate_EmptyAPI(t *testing.T) {
 }`
 
 	assert.Equal(t, expected, normalized)
+}
+
+func TestGenerate_ContactLicenseExternalDocs(t *testing.T) {
+	type Response struct {
+		Body struct{} `body:"structured"`
+	}
+
+	api := NewAPI(
+		WithInfoTitle("Test API"),
+		WithInfoVersion("1.0.0"),
+		WithInfoSummary("A summary of the API"),
+		WithTermsOfService("https://example.com/terms"),
+		WithContact("Support Team", "https://example.com/support", "support@example.com"),
+		WithLicense("MIT", "https://opensource.org/licenses/MIT"),
+		WithExternalDocs("https://docs.example.com", "Full documentation"),
+		WithVersion("3.1.2"),
+	)
+
+	result, err := api.Generate(context.Background(),
+		GET("/test", WithResponse(200, Response{})),
+	)
+
+	require.NoError(t, err)
+
+	normalized, err := normalizeJSON(result.JSON)
+	require.NoError(t, err)
+
+	expected := `{
+  "components": {
+    "schemas": {
+      "ResponseBody": {
+        "type": "object"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Full documentation",
+    "url": "https://docs.example.com"
+  },
+  "info": {
+    "contact": {
+      "email": "support@example.com",
+      "name": "Support Team",
+      "url": "https://example.com/support"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "summary": "A summary of the API",
+    "termsOfService": "https://example.com/terms",
+    "title": "Test API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.2",
+  "paths": {
+    "/test": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}`
+
+	assert.Equal(t, expected, normalized)
+}
+
+func TestGenerate_LicenseIdentifier(t *testing.T) {
+	type Response struct {
+		Body struct{} `body:"structured"`
+	}
+
+	api := NewAPI(
+		WithInfoTitle("Test API"),
+		WithInfoVersion("1.0.0"),
+		WithLicenseIdentifier("MIT", "MIT"),
+		WithVersion("3.1.2"),
+	)
+
+	result, err := api.Generate(context.Background(),
+		GET("/test", WithResponse(200, Response{})),
+	)
+
+	require.NoError(t, err)
+
+	normalized, err := normalizeJSON(result.JSON)
+	require.NoError(t, err)
+
+	expected := `{
+  "components": {
+    "schemas": {
+      "ResponseBody": {
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "license": {
+      "identifier": "MIT",
+      "name": "MIT"
+    },
+    "title": "Test API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.2",
+  "paths": {
+    "/test": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}`
+
+	assert.Equal(t, expected, normalized)
+}
+
+func TestGenerate_InfoExtensions(t *testing.T) {
+	type Response struct {
+		Body struct{} `body:"structured"`
+	}
+
+	api := NewAPI(
+		WithInfoTitle("Test API"),
+		WithInfoVersion("1.0.0"),
+		WithInfoExtension("x-api-id", "12345"),
+		WithInfoExtension("x-internal", true),
+		WithVersion("3.1.2"),
+	)
+
+	result, err := api.Generate(context.Background(),
+		GET("/test", WithResponse(200, Response{})),
+	)
+
+	require.NoError(t, err)
+
+	normalized, err := normalizeJSON(result.JSON)
+	require.NoError(t, err)
+
+	expected := `{
+  "components": {
+    "schemas": {
+      "ResponseBody": {
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Test API",
+    "version": "1.0.0",
+    "x-api-id": "12345",
+    "x-internal": true
+  },
+  "openapi": "3.1.2",
+  "paths": {
+    "/test": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}`
+
+	assert.Equal(t, expected, normalized)
+}
+
+func TestGenerate_ServerVariables(t *testing.T) {
+	type Response struct {
+		Body struct{} `body:"structured"`
+	}
+
+	api := NewAPI(
+		WithInfoTitle("Test API"),
+		WithInfoVersion("1.0.0"),
+		WithServer("https://{environment}.example.com:{port}/v1",
+			WithServerDescription("API server"),
+			WithServerVariable("environment", "prod", []string{"prod", "staging", "dev"}, "Environment"),
+			WithServerVariable("port", "443", []string{"443", "8443"}, "HTTPS port"),
+		),
+		WithVersion("3.1.2"),
+	)
+
+	result, err := api.Generate(context.Background(),
+		GET("/test", WithResponse(200, Response{})),
+	)
+
+	require.NoError(t, err)
+
+	normalized, err := normalizeJSON(result.JSON)
+	require.NoError(t, err)
+
+	expected := `{
+  "components": {
+    "schemas": {
+      "ResponseBody": {
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Test API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.2",
+  "paths": {
+    "/test": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "description": "API server",
+      "url": "https://{environment}.example.com:{port}/v1",
+      "variables": {
+        "environment": {
+          "default": "prod",
+          "description": "Environment",
+          "enum": [
+            "prod",
+            "staging",
+            "dev"
+          ]
+        },
+        "port": {
+          "default": "443",
+          "description": "HTTPS port",
+          "enum": [
+            "443",
+            "8443"
+          ]
+        }
+      }
+    }
+  ]
+}`
+
+	assert.Equal(t, expected, normalized)
+}
+
+func TestGenerate_ServerExtensions(t *testing.T) {
+	type Response struct {
+		Body struct{} `body:"structured"`
+	}
+
+	api := NewAPI(
+		WithInfoTitle("Test API"),
+		WithInfoVersion("1.0.0"),
+		WithServer("https://api.example.com",
+			WithServerDescription("Production"),
+			WithServerExtension("x-region", "us-west-2"),
+			WithServerExtension("x-internal-only", false),
+		),
+		WithVersion("3.1.2"),
+	)
+
+	result, err := api.Generate(context.Background(),
+		GET("/test", WithResponse(200, Response{})),
+	)
+
+	require.NoError(t, err)
+
+	normalized, err := normalizeJSON(result.JSON)
+	require.NoError(t, err)
+
+	expected := `{
+  "components": {
+    "schemas": {
+      "ResponseBody": {
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Test API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.2",
+  "paths": {
+    "/test": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "description": "Production",
+      "url": "https://api.example.com",
+      "x-internal-only": false,
+      "x-region": "us-west-2"
+    }
+  ]
+}`
+
+	assert.Equal(t, expected, normalized)
+}
+
+func TestGenerate_APIKeySecurity(t *testing.T) {
+	type Response struct {
+		Body struct{} `body:"structured"`
+	}
+
+	api := NewAPI(
+		WithInfoTitle("Test API"),
+		WithInfoVersion("1.0.0"),
+		WithAPIKey("apiKeyHeader", "X-API-Key", "header", "API key in header"),
+		WithAPIKey("apiKeyQuery", "api_key", "query", "API key in query"),
+		WithAPIKey("apiKeyCookie", "session", "cookie", "API key in cookie"),
+		WithVersion("3.1.2"),
+	)
+
+	result, err := api.Generate(context.Background(),
+		GET("/test",
+			WithSecurity("apiKeyHeader"),
+			WithResponse(200, Response{}),
+		),
+	)
+
+	require.NoError(t, err)
+
+	normalized, err := normalizeJSON(result.JSON)
+	require.NoError(t, err)
+
+	expected := `{
+  "components": {
+    "schemas": {
+      "ResponseBody": {
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "apiKeyCookie": {
+        "description": "API key in cookie",
+        "in": "cookie",
+        "name": "session",
+        "type": "apiKey"
+      },
+      "apiKeyHeader": {
+        "description": "API key in header",
+        "in": "header",
+        "name": "X-API-Key",
+        "type": "apiKey"
+      },
+      "apiKeyQuery": {
+        "description": "API key in query",
+        "in": "query",
+        "name": "api_key",
+        "type": "apiKey"
+      }
+    }
+  },
+  "info": {
+    "title": "Test API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.2",
+  "paths": {
+    "/test": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "apiKeyHeader": []
+          }
+        ]
+      }
+    }
+  }
+}`
+
+	assert.Equal(t, expected, normalized)
+}
+
+func TestGenerate_OAuth2Security(t *testing.T) {
+	type Response struct {
+		Body struct{} `body:"structured"`
+	}
+
+	api := NewAPI(
+		WithInfoTitle("Test API"),
+		WithInfoVersion("1.0.0"),
+		WithOAuth2(
+			"oauth2",
+			"OAuth 2.0",
+			OAuth2Flow{
+				Type:             FlowAuthorizationCode,
+				AuthorizationURL: "https://auth.example.com/authorize",
+				TokenURL:         "https://auth.example.com/token",
+				RefreshURL:       "https://auth.example.com/refresh",
+				Scopes: map[string]string{
+					"read:users":  "Read user data",
+					"write:users": "Write user data",
+				},
+			},
+		),
+		WithVersion("3.1.2"),
+	)
+
+	result, err := api.Generate(context.Background(),
+		GET("/test",
+			WithSecurity("oauth2", "read:users"),
+			WithResponse(200, Response{}),
+		),
+	)
+
+	require.NoError(t, err)
+
+	normalized, err := normalizeJSON(result.JSON)
+	require.NoError(t, err)
+
+	expected := `{
+  "components": {
+    "schemas": {
+      "ResponseBody": {
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "description": "OAuth 2.0",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.example.com/authorize",
+            "refreshUrl": "https://auth.example.com/refresh",
+            "scopes": {
+              "read:users": "Read user data",
+              "write:users": "Write user data"
+            },
+            "tokenUrl": "https://auth.example.com/token"
+          }
+        },
+        "type": "oauth2"
+      }
+    }
+  },
+  "info": {
+    "title": "Test API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.2",
+  "paths": {
+    "/test": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read:users"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}`
+
+	assert.Equal(t, expected, normalized)
+}
+
+func TestGenerate_OpenIDConnectSecurity(t *testing.T) {
+	type Response struct {
+		Body struct{} `body:"structured"`
+	}
+
+	api := NewAPI(
+		WithInfoTitle("Test API"),
+		WithInfoVersion("1.0.0"),
+		WithOpenIDConnect("oidc", "https://auth.example.com/.well-known/openid-configuration", "OpenID Connect"),
+		WithVersion("3.1.2"),
+	)
+
+	result, err := api.Generate(context.Background(),
+		GET("/test",
+			WithSecurity("oidc"),
+			WithResponse(200, Response{}),
+		),
+	)
+
+	require.NoError(t, err)
+
+	normalized, err := normalizeJSON(result.JSON)
+	require.NoError(t, err)
+
+	expected := `{
+  "components": {
+    "schemas": {
+      "ResponseBody": {
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "oidc": {
+        "description": "OpenID Connect",
+        "openIdConnectUrl": "https://auth.example.com/.well-known/openid-configuration",
+        "type": "openIdConnect"
+      }
+    }
+  },
+  "info": {
+    "title": "Test API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.2",
+  "paths": {
+    "/test": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "oidc": []
+          }
+        ]
+      }
+    }
+  }
+}`
+
+	assert.Equal(t, expected, normalized)
+}
+
+func TestGenerate_DefaultSecurity(t *testing.T) {
+	type Response struct {
+		Body struct{} `body:"structured"`
+	}
+
+	api := NewAPI(
+		WithInfoTitle("Test API"),
+		WithInfoVersion("1.0.0"),
+		WithBearerAuth("bearerAuth", "JWT"),
+		WithDefaultSecurity("bearerAuth"),
+		WithVersion("3.1.2"),
+	)
+
+	result, err := api.Generate(context.Background(),
+		GET("/protected", WithResponse(200, Response{})),
+	)
+
+	require.NoError(t, err)
+
+	normalized, err := normalizeJSON(result.JSON)
+	require.NoError(t, err)
+
+	expected := `{
+  "components": {
+    "schemas": {
+      "ResponseBody": {
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "bearerFormat": "JWT",
+        "description": "JWT",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "title": "Test API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.2",
+  "paths": {
+    "/protected": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}`
+
+	assert.Equal(t, expected, normalized)
+}
+
+func TestGenerate_CustomTagConfig(t *testing.T) {
+	type Body struct {
+		Name string `json:"name"`
+	}
+	type Request struct {
+		ID   int  `param:"id,location=path"`
+		Data Body `payload:"structured"`
+	}
+	type Response struct {
+		Body Body `payload:"structured"`
+	}
+
+	api := NewAPI(
+		WithInfoTitle("Test API"),
+		WithInfoVersion("1.0.0"),
+		WithTagConfig(config.TagConfig{
+			Schema: "param",
+			Body:   "payload",
+		}),
+		WithVersion("3.1.2"),
+	)
+
+	result, err := api.Generate(context.Background(),
+		POST("/items/:id",
+			WithRequest(Request{}),
+			WithResponse(200, Response{}),
+		),
+	)
+
+	require.NoError(t, err)
+
+	normalized, err := normalizeJSON(result.JSON)
+	require.NoError(t, err)
+
+	expected := `{
+  "components": {
+    "schemas": {
+      "Body": {
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Test API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.2",
+  "paths": {
+    "/items/{id}": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Body"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}`
+
+	assert.Equal(t, expected, normalized)
+}
+
+func TestGenerate_CustomSchemaPrefix(t *testing.T) {
+	type User struct {
+		ID int `json:"id"`
+	}
+	type Response struct {
+		Body User `body:"structured"`
+	}
+
+	api := NewAPI(
+		WithInfoTitle("Test API"),
+		WithInfoVersion("1.0.0"),
+		WithSchemaPrefix("#/definitions/"),
+		WithVersion("3.1.2"),
+	)
+
+	result, err := api.Generate(context.Background(),
+		GET("/users", WithResponse(200, Response{})),
+	)
+
+	require.NoError(t, err)
+
+	normalized, err := normalizeJSON(result.JSON)
+	require.NoError(t, err)
+
+	expected := `{
+  "components": {
+    "schemas": {
+      "User": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Test API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.2",
+  "paths": {
+    "/users": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}`
+
+	assert.Equal(t, expected, normalized)
+}
+
+func TestGenerate_UnsupportedVersion(t *testing.T) {
+	type Response struct {
+		Body struct{} `body:"structured"`
+	}
+
+	api := NewAPI(
+		WithInfoTitle("Test API"),
+		WithInfoVersion("1.0.0"),
+		WithVersion("2.0.0"),
+	)
+
+	_, err := api.Generate(context.Background(),
+		GET("/test", WithResponse(200, Response{})),
+	)
+
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "unsupported OpenAPI version")
 }

@@ -338,6 +338,10 @@ func WithTags(tags ...string) OperationDocOption {
 //	)
 func WithSecurity(scheme string, scopes ...string) OperationDocOption {
 	return func(d *operationDoc) {
+		// Ensure scopes is always an empty slice, never nil, per OpenAPI spec
+		if scopes == nil {
+			scopes = []string{}
+		}
 		d.Security = append(d.Security, SecurityReq{
 			Scheme: scheme,
 			Scopes: scopes,

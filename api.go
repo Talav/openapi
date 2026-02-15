@@ -552,6 +552,10 @@ func WithOpenIDConnect(name, url, desc string) Option {
 //	openapi.WithDefaultSecurity("oauth2", "read", "write")
 func WithDefaultSecurity(scheme string, scopes ...string) Option {
 	return func(a *API) {
+		// Ensure scopes is always an empty slice, never nil, per OpenAPI spec
+		if scopes == nil {
+			scopes = []string{}
+		}
 		a.DefaultSecurity = append(a.DefaultSecurity, model.SecurityRequirement{
 			scheme: scopes,
 		})
