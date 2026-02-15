@@ -944,67 +944,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#best-practices" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Best Practices
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Best Practices">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#realistic-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Realistic Data
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cover-edge-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cover Edge Cases
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#consistent-naming" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Consistent Naming
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#document-with-summaries" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Document with Summaries
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#complete-example" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1478,56 +1417,6 @@ Examples are defined explicitly:</p>
 <span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithExternalValue</span><span class="p">(</span><span class="s">&quot;https://example.com/examples/user.json&quot;</span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
-<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Anchor link to this section">&para;</a></h2>
-<h3 id="realistic-data">Realistic Data<a class="headerlink" href="#realistic-data" title="Anchor link to this section">&para;</a></h3>
-<p>Use realistic data that helps developers understand your API:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// ✗ Bad: generic placeholders</span>
-<span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">    </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;user@example.com&quot;</span><span class="p">,</span>
-<span class="p">})</span>
-
-<span class="c1">// ✓ Good: realistic data</span>
-<span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">    </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;Sarah Johnson&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;sarah.johnson@company.com&quot;</span><span class="p">,</span>
-<span class="p">})</span>
-</code></pre></div>
-<h3 id="cover-edge-cases">Cover Edge Cases<a class="headerlink" href="#cover-edge-cases" title="Anchor link to this section">&para;</a></h3>
-<p>Provide examples for different scenarios:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Normal case</span>
-<span class="nx">normalExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;normal&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span><span class="s">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">}),</span>
-<span class="p">)</span>
-
-<span class="c1">// Edge cases</span>
-<span class="nx">minimumExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;minimum_age&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span><span class="s">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">}),</span>
-<span class="p">)</span>
-
-<span class="nx">seniorExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;senior&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span><span class="s">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">75</span><span class="p">}),</span>
-<span class="p">)</span>
-</code></pre></div>
-<h3 id="consistent-naming">Consistent Naming<a class="headerlink" href="#consistent-naming" title="Anchor link to this section">&para;</a></h3>
-<p>Use clear, descriptive example names:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// ✗ Bad</span>
-<span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;ex1&quot;</span><span class="p">)</span>
-<span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;example2&quot;</span><span class="p">)</span>
-
-<span class="c1">// ✓ Good</span>
-<span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;successful_registration&quot;</span><span class="p">)</span>
-<span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;duplicate_email_error&quot;</span><span class="p">)</span>
-<span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;invalid_format_error&quot;</span><span class="p">)</span>
-</code></pre></div>
-<h3 id="document-with-summaries">Document with Summaries<a class="headerlink" href="#document-with-summaries" title="Anchor link to this section">&para;</a></h3>
-<p>Add summaries to explain examples:</p>
-<div class="highlight"><pre><span></span><code><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;admin_user&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;User with admin privileges&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithDescription</span><span class="p">(</span><span class="s">&quot;This user has full access to all admin features&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>
-<span class="p">)</span>
-</code></pre></div>
 <h2 id="complete-example">Complete Example<a class="headerlink" href="#complete-example" title="Anchor link to this section">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
@@ -1617,7 +1506,7 @@ Examples are defined explicitly:</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="February 15, 2026 03:54:14 UTC"><span class="timeago" datetime="2026-02-15T03:54:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="February 15, 2026 03:54:14 UTC">2026-02-15</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="February 15, 2026 04:15:17 UTC"><span class="timeago" datetime="2026-02-15T04:15:17+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="February 15, 2026 04:15:17 UTC">2026-02-15</span>
   </span>
 
     
