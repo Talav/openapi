@@ -150,6 +150,10 @@ func TestGenerate_POST_WithRequestBody(t *testing.T) {
             "type": "string"
           }
         },
+        "required": [
+          "name",
+          "email"
+        ],
         "type": "object"
       },
       "User": {
@@ -279,6 +283,9 @@ func TestGenerate_CRUD_Operations(t *testing.T) {
             "type": "string"
           }
         },
+        "required": [
+          "name"
+        ],
         "type": "object"
       },
       "UpdateUserRequestBody": {
@@ -287,6 +294,9 @@ func TestGenerate_CRUD_Operations(t *testing.T) {
             "type": "string"
           }
         },
+        "required": [
+          "name"
+        ],
         "type": "object"
       },
       "User": {
@@ -788,6 +798,10 @@ func TestGenerate_WithValidation(t *testing.T) {
             "type": "string"
           }
         },
+        "required": [
+          "name",
+          "email"
+        ],
         "type": "object"
       },
       "CreateUserResponseBody": {

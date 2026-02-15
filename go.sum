@@ -16,8 +16,8 @@ github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 github.com/talav/mapstructure v0.1.0 h1:/t+3+ZE23eYxEJksadQTaOWwYJy39KHaW8lqmceT8n4=
 github.com/talav/mapstructure v0.1.0/go.mod h1:l7tNTlHHwEPEZ3J9JLoRTo9YrVE+MdWy9flzA4KIE9Y=
-github.com/talav/schema v0.1.0 h1:F6Sa+sg8eZ8EKNX3feK9X5xJzJMRmtcYGBeFb2rIzpQ=
-github.com/talav/schema v0.1.0/go.mod h1:U+1ryTkHUwcwTEuRs98QEvUjSYaGF1AierW1srKdo3Y=
+github.com/talav/schema v0.2.0 h1:kxpEMVIl98VFuv470N+Cpq8LkadmDKcjSX+cV8hWvOc=
+github.com/talav/schema v0.2.0/go.mod h1:U+1ryTkHUwcwTEuRs98QEvUjSYaGF1AierW1srKdo3Y=
 github.com/talav/tagparser v1.0.1 h1:5CuoAU7DCvJbYsnjFQj7oKGPtHeRXAT54BPtZu23HWQ=
 github.com/talav/tagparser v1.0.1/go.mod h1:UxX/u2fXN5iklrT/Uxg9n9K1iB08+LdsN1NVw1nuW+s=
 golang.org/x/text v0.14.0 h1:ScX5w1eTa3QqT8oi6+ziP7dTV1S2+ALU0bI+0zXKWiQ=

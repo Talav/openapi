@@ -74,6 +74,11 @@ type User struct {
 	Name string
 }
 
+// CustomTagsRequired is used to test isRequiredFromMetadata with custom tag names.
+type CustomTagsRequired struct {
+	Name string `rules:"required" api:"required"`
+}
+
 func TestDeref(t *testing.T) {
 	tests := []struct {
 		name string
@@ -256,4 +261,98 @@ func TestFindBodyField(t *testing.T) {
 
 func boolPtr(b bool) *bool {
 	return &b
+}
+
+func TestIsRequiredFromMetadata(t *testing.T) {
+	cfg := config.DefaultTagConfig()
+
+	type ValidateRequired struct {
+		Name string `validate:"required"`
+	}
+	type OpenAPIRequired struct {
+		Name string `openapi:"required"`
+	}
+	type BothRequired struct {
+		Name string `validate:"required" openapi:"required"`
+	}
+	type NeitherRequired struct {
+		Name string `json:"name"`
+	}
+	type OpenAPIRequiredExplicit struct {
+		Name string `openapi:"required=true"`
+	}
+	type ValidateRequiredFalse struct {
+		Name string `validate:"required=false"`
+	}
+
+	tests := []struct {
+		name     string
+		typ      reflect.Type
+		fieldIdx int
+		cfg      config.TagConfig
+		want     bool
+	}{
+		{
+			name:     "validate required",
+			typ:      reflect.TypeOf(ValidateRequired{}),
+			fieldIdx: 0,
+			cfg:      cfg,
+			want:     true,
+		},
+		{
+			name:     "openapi required",
+			typ:      reflect.TypeOf(OpenAPIRequired{}),
+			fieldIdx: 0,
+			cfg:      cfg,
+			want:     true,
+		},
+		{
+			name:     "both required",
+			typ:      reflect.TypeOf(BothRequired{}),
+			fieldIdx: 0,
+			cfg:      cfg,
+			want:     true,
+		},
+		{
+			name:     "neither required",
+			typ:      reflect.TypeOf(NeitherRequired{}),
+			fieldIdx: 0,
+			cfg:      cfg,
+			want:     false,
+		},
+		{
+			name:     "openapi required explicit true",
+			typ:      reflect.TypeOf(OpenAPIRequiredExplicit{}),
+			fieldIdx: 0,
+			cfg:      cfg,
+			want:     true,
+		},
+		{
+			name:     "validate required false",
+			typ:      reflect.TypeOf(ValidateRequiredFalse{}),
+			fieldIdx: 0,
+			cfg:      cfg,
+			want:     false,
+		},
+		{
+			name:     "custom tag names",
+			typ:      reflect.TypeOf(CustomTagsRequired{}),
+			fieldIdx: 0,
+			cfg:      config.NewTagConfig("schema", "body", "api", "rules", "default", "requires"),
+			want:     true,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			meta := NewMetadata(tt.cfg)
+			structMeta, err := meta.GetStructMetadata(tt.typ)
+			require.NoError(t, err)
+			require.GreaterOrEqual(t, len(structMeta.Fields), tt.fieldIdx+1)
+
+			field := &structMeta.Fields[tt.fieldIdx]
+			got := isRequiredFromMetadata(field, tt.cfg)
+			assert.Equal(t, tt.want, got)
+		})
+	}
 }

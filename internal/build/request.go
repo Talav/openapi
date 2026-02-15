@@ -88,12 +88,23 @@ func (rb *requestBuilder) buildParameters(op *model.Operation, structMeta *schem
 			Name:        schemaMeta.ParamName,
 			Description: rb.getDescription(field),
 			In:          string(schemaMeta.Location),
-			Required:    schemaMeta.Required,
+			Required:    rb.isParameterRequired(field, schemaMeta),
 			Schema:      paramSchema,
 			Style:       string(schemaMeta.Style),
 			Explode:     schemaMeta.Explode,
 		})
 	}
+}
+
+// isParameterRequired determines if a parameter is required.
+// Path parameters are always required per OpenAPI spec.
+// For other locations, required is derived from openapi or validate tags, or defaults to false.
+func (rb *requestBuilder) isParameterRequired(field *schema.FieldMetadata, schemaMeta *schema.SchemaMetadata) bool {
+	if schemaMeta.Location == schema.LocationPath {
+		return true
+	}
+
+	return isRequiredFromMetadata(field, rb.tagCfg)
 }
 
 // getDescription returns the description from openapi metadata for the field, or "" if unset.
@@ -128,7 +139,7 @@ func (rb *requestBuilder) buildRequestBody(op *model.Operation, structMeta *sche
 		}
 	}
 
-	op.RequestBody.Required = isRequestBodyRequired(bodyMeta, bodyField)
+	op.RequestBody.Required = isRequestBodyRequired(bodyField, rb.tagCfg)
 
 	// Determine content type based on BodyType
 	contentType := getRequestContentType(bodyMeta.BodyType)
@@ -151,7 +162,7 @@ func (rb *requestBuilder) buildRequestBody(op *model.Operation, structMeta *sche
 //
 // Two inputs are considered, in order:
 //
-//  1. Explicit metadata: bodyMeta.Required from the body tag (e.g. body:"structured,required").
+//  1. Explicit metadata: openapi:"required" on the body field.
 //     When set, the body is required regardless of type.
 //
 //  2. Type-based inference when metadata does not require it:
@@ -164,10 +175,12 @@ func (rb *requestBuilder) buildRequestBody(op *model.Operation, structMeta *sche
 //
 //	Body MyStruct  `body:"structured"`   -> required (non-pointer)
 //	Body *MyStruct `body:"structured"`   -> optional (pointer)
-//	Body *MyStruct `body:"structured,required"` -> required (explicit flag)
-func isRequestBodyRequired(bodyMeta *schema.BodyMetadata, bodyField *schema.FieldMetadata) bool {
-	if bodyMeta.Required {
-		return true
+//	Body *MyStruct `body:"structured" openapi:"required"` -> required (explicit flag)
+func isRequestBodyRequired(bodyField *schema.FieldMetadata, tagCfg config.TagConfig) bool {
+	if openAPIMeta, ok := schema.GetTagMetadata[*metadata.OpenAPIMetadata](bodyField, tagCfg.OpenAPI); ok {
+		if toBool(openAPIMeta.Required) {
+			return true
+		}
 	}
 	// Non-pointer, non-interface types cannot be nil; treat as required.
 	k := bodyField.Type.Kind()

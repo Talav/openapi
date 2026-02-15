@@ -1,0 +1,116 @@
+site_name: OpenAPI Specification
+site_description: Generate OpenAPI 3.0.4 and 3.1.2 specifications from Go structs
+site_url: https://talav.github.io/openapi
+repo_name: talav/openapi
+repo_url: https://github.com/talav/openapi
+
+theme:
+  name: material
+
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+      primary: indigo
+      accent: indigo
+
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+      primary: indigo
+      accent: indigo
+
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+      primary: indigo
+      accent: indigo
+
+  features:
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.tracking
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - search.share
+    - toc.follow
+    - toc.integrate
+    - content.code.copy
+    - content.code.annotate
+
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation: getting-started/installation.md
+      - Quick Start: getting-started/quick-start.md
+      - Core Concepts: getting-started/concepts.md
+  - Guides:
+      - Validation: guides/validation.md
+      - Metadata: guides/metadata.md
+      - Security: guides/security.md
+      - Examples: guides/examples.md
+      - OpenAPI Versions: guides/versions.md
+  - Advanced:
+      - Schema Hooks: advanced/hooks.md
+      - Custom Tags: advanced/custom-tags.md
+  - Reference:
+      - API Docs ↗: https://pkg.go.dev/github.com/talav/openapi
+
+plugins:
+  - search:
+      lang: en
+      separator: '[\s\-\.]+'
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: timeago
+
+markdown_extensions:
+  # Python Markdown extensions
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      permalink_title: Anchor link to this section
+
+  # PyMdown Extensions
+  - pymdownx.arithmatex
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/talav/openapi
+    - icon: fontawesome/brands/golang
+      link: https://pkg.go.dev/github.com/talav/openapi
+
+copyright: Copyright &copy; 2026 Talav

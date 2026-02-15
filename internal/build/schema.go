@@ -429,7 +429,7 @@ func (g *SchemaGenerator) processStructFields(t reflect.Type, structMeta schema.
 		name := g.defineFieldName(reflectField, fieldMeta)
 
 		// Determine required status from metadata
-		fieldRequired := g.isRequired(fieldMeta)
+		fieldRequired := isRequiredFromMetadata(&fieldMeta, g.tagCfg)
 
 		// Apply OpenAPI metadata
 		g.applyOpenAPIMetadata(fs, fieldMeta)
@@ -503,21 +503,6 @@ func (g *SchemaGenerator) defineFieldName(field reflect.StructField, fieldMeta s
 func (g *SchemaGenerator) isHidden(fieldMeta schema.FieldMetadata) bool {
 	if openAPIMeta, ok := schema.GetTagMetadata[*metadata.OpenAPIMetadata](&fieldMeta, g.tagCfg.OpenAPI); ok {
 		return toBool(openAPIMeta.Hidden)
-	}
-
-	return false
-}
-
-// isRequired determines if a field is required based on metadata.
-func (g *SchemaGenerator) isRequired(fieldMeta schema.FieldMetadata) bool {
-	// Check SchemaMetadata.Required
-	if schemaMeta, ok := schema.GetTagMetadata[*schema.SchemaMetadata](&fieldMeta, g.tagCfg.Schema); ok {
-		return toBool(schemaMeta.Required)
-	}
-
-	// Check ValidateMetadata.Required
-	if validateMeta, ok := schema.GetTagMetadata[*metadata.ValidateMetadata](&fieldMeta, g.tagCfg.Validate); ok {
-		return toBool(validateMeta.Required)
 	}
 
 	return false

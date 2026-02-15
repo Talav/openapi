@@ -4,6 +4,7 @@ import (
 	"reflect"
 
 	"github.com/talav/openapi/config"
+	"github.com/talav/openapi/internal/metadata"
 	"github.com/talav/schema"
 )
 
@@ -69,4 +70,20 @@ func toBool(b any) bool {
 	default:
 		return false
 	}
+}
+
+// isRequiredFromMetadata returns true if the field is marked required via openapi or validate tags.
+func isRequiredFromMetadata(field *schema.FieldMetadata, tagCfg config.TagConfig) bool {
+	if openAPIMeta, ok := schema.GetTagMetadata[*metadata.OpenAPIMetadata](field, tagCfg.OpenAPI); ok {
+		if toBool(openAPIMeta.Required) {
+			return true
+		}
+	}
+	if validateMeta, ok := schema.GetTagMetadata[*metadata.ValidateMetadata](field, tagCfg.Validate); ok {
+		if toBool(validateMeta.Required) {
+			return true
+		}
+	}
+
+	return false
 }
