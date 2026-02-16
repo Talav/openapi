@@ -737,6 +737,56 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#response-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Response Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Response Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simple-pattern-most-common" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simple Pattern (Most Common)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-pattern-with-response-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Pattern (With Response Headers)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-content-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Content Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#schema-generation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1359,13 +1409,87 @@
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="response-structs">Response Structs<a class="headerlink" href="#response-structs" title="Anchor link to this section">&para;</a></h3>
-<p>Response structs typically have a body and optional headers:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">CreatePostResponse</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Location</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;Location,location=header&quot;`</span><span class="w"> </span><span class="c1">// Response header</span>
-<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">ID</span><span class="w">        </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;id&quot;`</span>
-<span class="w">        </span><span class="nx">CreatedAt</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;created_at&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span><span class="w"> </span><span class="c1">// Response body</span>
+<p>Response structs can use either pattern:</p>
+<p><strong>Simple pattern</strong> - the struct is the response body:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;id&quot;`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
+<span class="p">}</span>
+
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{})</span><span class="w"> </span><span class="c1">// User becomes the response schema</span>
+</code></pre></div>
+<p><strong>Advanced pattern</strong> - use body tag for headers:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">UserResponse</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ETag</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;ETag,location=header&quot;`</span><span class="w"> </span><span class="c1">// Response header</span>
+<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="nx">User</span><span class="w">   </span><span class="s">`body:&quot;structured&quot;`</span><span class="w">              </span><span class="c1">// Response body</span>
+<span class="p">}</span>
+
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">UserResponse</span><span class="p">{})</span><span class="w"> </span><span class="c1">// Includes headers</span>
+</code></pre></div>
+<h2 id="response-patterns">Response Patterns<a class="headerlink" href="#response-patterns" title="Anchor link to this section">&para;</a></h2>
+<p>The library supports two patterns for responses:</p>
+<h3 id="simple-pattern-most-common">Simple Pattern (Most Common)<a class="headerlink" href="#simple-pattern-most-common" title="Anchor link to this section">&para;</a></h3>
+<p>Pass your response struct directly - the entire struct becomes the response body:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;id&quot;`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
+<span class="p">}</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">ErrorResponse</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Message</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;message&quot;`</span>
+<span class="w">    </span><span class="nx">Code</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;code&quot;`</span>
+<span class="p">}</span>
+
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users/:id&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span><span class="w">           </span><span class="c1">// ✅ Simple</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="nx">ErrorResponse</span><span class="p">{}),</span><span class="w">  </span><span class="c1">// ✅ Simple</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="advanced-pattern-with-response-headers">Advanced Pattern (With Response Headers)<a class="headerlink" href="#advanced-pattern-with-response-headers" title="Anchor link to this section">&para;</a></h3>
+<p>Use the <code>body</code> tag wrapper when you need to include response headers:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">UserWithHeaders</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ETag</span><span class="w">         </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;ETag,location=header&quot;`</span>
+<span class="w">    </span><span class="nx">CacheControl</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;Cache-Control,location=header&quot;`</span>
+<span class="w">    </span><span class="nx">Body</span><span class="w">         </span><span class="nx">User</span><span class="w">   </span><span class="s">`body:&quot;structured&quot;`</span>
+<span class="p">}</span>
+
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users/:id&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">UserWithHeaders</span><span class="p">{}),</span><span class="w"> </span><span class="c1">// Includes headers</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Use the wrapper pattern only when you need response headers. For standard responses, use the simple pattern.</p>
+<h3 id="custom-content-types">Custom Content Types<a class="headerlink" href="#custom-content-types" title="Anchor link to this section">&para;</a></h3>
+<p>By default, responses use <code>application/json</code>. To return a different content type, implement the <code>ContentTypeProvider</code> interface on your response struct:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">ProblemDetail</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Type</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;type&quot;`</span>
+<span class="w">    </span><span class="nx">Title</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;title&quot;`</span>
+<span class="w">    </span><span class="nx">Status</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;status&quot;`</span>
+<span class="w">    </span><span class="nx">Detail</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;detail&quot;`</span>
+<span class="p">}</span>
+
+<span class="c1">// ContentTypeProvider interface</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">ProblemDetail</span><span class="p">)</span><span class="w"> </span><span class="nx">ContentType</span><span class="p">(</span><span class="nx">defaultType</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;application/problem+json&quot;</span>
+<span class="p">}</span>
+
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users/:id&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="nx">ProblemDetail</span><span class="p">{}),</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>The generated OpenAPI spec will use <code>application/problem+json</code> instead of <code>application/json</code> for this response.</p>
+<p><strong>Common use cases:</strong></p>
+<ul>
+<li>RFC 7807 Problem Details: <code>application/problem+json</code></li>
+<li>HAL responses: <code>application/hal+json</code></li>
+<li>JSON:API: <code>application/vnd.api+json</code></li>
+<li>Custom vendor types: <code>application/vnd.myapp+json</code></li>
+</ul>
+<p>The method receives the default content type as a parameter, allowing conditional logic:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="nx">APIResponse</span><span class="p">)</span><span class="w"> </span><span class="nx">ContentType</span><span class="p">(</span><span class="nx">defaultType</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">IsError</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;application/problem+json&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">defaultType</span><span class="w"> </span><span class="c1">// Use default application/json</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="schema-generation">Schema Generation<a class="headerlink" href="#schema-generation" title="Anchor link to this section">&para;</a></h2>
@@ -1452,13 +1576,13 @@
 <span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
 <span class="p">}</span>
 
-<span class="kd">type</span><span class="w"> </span><span class="nx">CreateUserRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span>
-<span class="p">}</span>
-
-<span class="kd">type</span><span class="w"> </span><span class="nx">GetUserResponse</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span>
-<span class="p">}</span>
+<span class="c1">// User appears in both operations</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
+<span class="p">),</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users/:id&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
+<span class="p">)</span>
 </code></pre></div>
 <p><code>User</code> appears once in <code>components/schemas</code> and is referenced from both operations.</p>
 <h2 id="openapi-versions">OpenAPI Versions<a class="headerlink" href="#openapi-versions" title="Anchor link to this section">&para;</a></h2>
@@ -1502,7 +1626,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="February 15, 2026 03:54:14 UTC"><span class="timeago" datetime="2026-02-15T03:54:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="February 15, 2026 03:54:14 UTC">2026-02-15</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="February 16, 2026 23:31:28 UTC"><span class="timeago" datetime="2026-02-16T23:31:28+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="February 16, 2026 23:31:28 UTC">2026-02-16</span>
   </span>
 
     
