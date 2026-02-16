@@ -69,90 +69,87 @@ func (rb *responseBuilder) buildOperationResponse(op *model.Operation, status in
 
 	resp := getResponse(op, status)
 
-	if resp.Content == nil {
-		resp.Content = make(map[string]*model.MediaType)
-	}
-
-	// Find and process body field
-	bodyField := findBodyField(structMeta, rb.tagCfg)
-	if bodyField == nil {
-		return nil
-	}
-
-	// Extract body schema and add to response
-	if err := rb.extractBodySchema(bodyField, resp, structMeta.Type, op); err != nil {
+	// Extract body schema - handles both tagged fields and plain structs
+	if err := rb.extractBodySchema(structMeta, resp, op.OperationID); err != nil {
 		return err
 	}
 
-	// Extract header schemas and add to success response
+	// Extract headers only when using wrapper pattern
 	rb.buildResponseHeaders(structMeta, resp)
 
 	return nil
 }
 
-// extractBodySchema extracts the body schema from a body field and adds it to the response.
-func (rb *responseBuilder) extractBodySchema(
-	bodyField *schema.FieldMetadata,
-	resp *model.Response,
-	structType reflect.Type,
-	op *model.Operation,
-) error {
-	// Get body metadata to determine content type based on body tag
-	bodyMeta, ok := schema.GetTagMetadata[*schema.BodyMetadata](bodyField, rb.tagCfg.Body)
-	if !ok {
-		return fmt.Errorf("body field missing body metadata")
+// extractBodySchema extracts the body schema and adds it to the response.
+// Supports both wrapper pattern (bodyField != nil) and plain struct pattern (bodyField == nil).
+func (rb *responseBuilder) extractBodySchema(structMeta *schema.StructMetadata, resp *model.Response, operationID string) error {
+	var bodyType reflect.Type
+	var bodyMeta *schema.BodyMetadata
+	var hint string
+	var schemaBodyType schema.BodyType
+
+	// Find body field with body tag
+	bodyField := findBodyField(structMeta, rb.tagCfg)
+	if bodyField != nil {
+		// Wrapper pattern: extract from tagged field
+		var ok bool
+		bodyMeta, ok = schema.GetTagMetadata[*schema.BodyMetadata](bodyField, rb.tagCfg.Body)
+		if !ok {
+			return fmt.Errorf("body field missing body metadata")
+		}
+		bodyType = bodyField.Type
+		schemaBodyType = bodyMeta.BodyType
+		hint = getSchemaHint(structMeta.Type, bodyField.StructFieldName, operationID)
+	} else {
+		// Plain struct pattern: use entire struct as body
+		bodyType = structMeta.Type
+		schemaBodyType = schema.BodyTypeStructured
+		hint = getSchemaHint(structMeta.Type, "Response", operationID)
 	}
 
 	// Determine content type
-	ct, err := rb.determineContentType(bodyField, bodyMeta)
-	if err != nil {
-		return err
+	ct := rb.determineContentType(bodyType, schemaBodyType)
+
+	// Generate schema
+	bodySchema := rb.generator.schema(bodyType, true, hint)
+	if bodyMeta != nil && bodyMeta.BodyType == schema.BodyTypeFile {
+		bodySchema = transformSchemaForFileResponse(bodySchema)
 	}
 
-	// Initialize media type if needed (only if Content is empty)
-	if len(resp.Content) == 0 {
-		resp.Content[ct] = &model.MediaType{}
-	}
-
-	// Generate and transform body schema based on body type
-	hint := getSchemaHint(structType, bodyField.StructFieldName, op.OperationID)
-	bodySchema := rb.generateBodySchema(bodyField, bodyMeta, hint)
-	if bodySchema != nil && resp.Content[ct] != nil && resp.Content[ct].Schema == nil {
-		resp.Content[ct].Schema = bodySchema
+	// Set response content
+	resp.Content[ct] = &model.MediaType{
+		Schema: bodySchema,
 	}
 
 	return nil
 }
 
-// generateBodySchema generates and transforms the response body schema based on body type.
-func (rb *responseBuilder) generateBodySchema(bodyField *schema.FieldMetadata, bodyMeta *schema.BodyMetadata, hint string) *model.Schema {
-	bodySchema := rb.generator.schema(bodyField.Type, true, hint)
+// determineContentType determines the content type for a response body.
+// Uses bodyMeta if available (wrapper pattern), otherwise defaults to JSON.
+func (rb *responseBuilder) determineContentType(bodyType reflect.Type, bodySchemaType schema.BodyType) string {
+	ct := contentTypeJSON
 
-	if bodyMeta.BodyType == schema.BodyTypeFile {
-		return transformSchemaForFileResponse(bodySchema)
+	switch bodySchemaType {
+	case schema.BodyTypeStructured:
+		ct = contentTypeJSON
+	case schema.BodyTypeFile:
+		ct = contentTypeOctetStream
+	case schema.BodyTypeMultipart:
+		// Multipart is not valid for responses, but we'll default to JSON
+		// The validation will be caught elsewhere if needed
+		ct = contentTypeJSON
 	}
 
-	return bodySchema
-}
-
-// determineContentType determines the content type for a body field.
-// Returns an error if the body type is invalid for responses.
-func (rb *responseBuilder) determineContentType(bodyField *schema.FieldMetadata, bodyMeta *schema.BodyMetadata) (string, error) {
-	// Determine content type based on BodyType (validates that multipart is not used)
-	ct, err := getResponseContentType(bodyMeta.BodyType)
-	if err != nil {
-		return "", fmt.Errorf("field %q: %w", bodyField.StructFieldName, err)
-	}
-
-	// Fallback to ContentTypeProvider interface if needed
-	if ct == contentTypeJSON && reflect.PointerTo(bodyField.Type).Implements(reflect.TypeOf((*ContentTypeProvider)(nil)).Elem()) {
-		instance, ok := reflect.New(bodyField.Type).Interface().(ContentTypeProvider)
+	// Check if type implements ContentTypeProvider interface
+	contentTypeProviderType := reflect.TypeOf((*ContentTypeProvider)(nil)).Elem()
+	if reflect.PointerTo(bodyType).Implements(contentTypeProviderType) {
+		instance, ok := reflect.New(bodyType).Interface().(ContentTypeProvider)
 		if ok {
 			ct = instance.ContentType(ct)
 		}
 	}
 
-	return ct, nil
+	return ct
 }
 
 // buildResponseHeaders extracts header schemas from fields with "schema" tag and location=header
@@ -217,6 +214,10 @@ func getResponse(op *model.Operation, statusCode int) *model.Response {
 		}
 	}
 
+	if op.Responses[statusStr].Content == nil {
+		op.Responses[statusStr].Content = make(map[string]*model.MediaType)
+	}
+
 	return op.Responses[statusStr]
 }
 
@@ -240,20 +241,4 @@ func transformSchemaForFileResponse(s *model.Schema) *model.Schema {
 	}
 
 	return s
-}
-
-// getResponseContentType maps BodyType to HTTP content-type for responses.
-// Returns an error if the body type is invalid for responses.
-// Valid types: BodyTypeStructured (JSON), BodyTypeFile (octet-stream).
-func getResponseContentType(bodyType schema.BodyType) (string, error) {
-	switch bodyType {
-	case schema.BodyTypeStructured:
-		return contentTypeJSON, nil
-	case schema.BodyTypeFile:
-		return contentTypeOctetStream, nil
-	case schema.BodyTypeMultipart:
-		return "", fmt.Errorf("invalid body type for response: multipart is not supported, use %q or %q", schema.BodyTypeStructured, schema.BodyTypeFile)
-	default:
-		return "", fmt.Errorf("invalid body type for response: empty body tag, must explicitly specify body type (e.g., body:\"structured\" or body:\"file\")")
-	}
 }

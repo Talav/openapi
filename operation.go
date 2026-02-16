@@ -281,11 +281,29 @@ func WithRequest(req any, examples ...example.Example) OperationDocOption {
 
 // WithResponse sets the response schema and examples for a status code.
 //
-// Example:
+// Supports two patterns:
+//
+// 1. Simple pattern - pass the response struct directly:
+//
+//	type User struct {
+//	    ID   int    `json:"id"`
+//	    Name string `json:"name"`
+//	}
 //
 //	openapi.GET("/users/:id",
 //	    openapi.WithResponse(200, User{}),
-//	    openapi.WithResponse(404, ErrorResponse{}),
+//	    openapi.WithResponse(404, ErrorModel{}),
+//	)
+//
+// 2. Advanced pattern - wrap with body tag for headers:
+//
+//	type UserResponse struct {
+//	    Body User   `body:"structured"`
+//	    ETag string `schema:"ETag,location=header"`
+//	}
+//
+//	openapi.GET("/users/:id",
+//	    openapi.WithResponse(200, UserResponse{}),
 //	)
 //
 // With named examples:
@@ -293,10 +311,7 @@ func WithRequest(req any, examples ...example.Example) OperationDocOption {
 //	openapi.GET("/users/:id",
 //	    openapi.WithResponse(200, User{},
 //	        example.New("success", User{ID: 1, Name: "John"}),
-//	        example.New("admin", User{ID: 2, Name: "Admin"},
-//	            example.WithSummary("Admin user"),
-//	            example.WithDescription("User with elevated permissions"),
-//	        ),
+//	        example.New("admin", User{ID: 2, Name: "Admin"}),
 //	    ),
 //	)
 func WithResponse(status int, resp any, examples ...example.Example) OperationDocOption {

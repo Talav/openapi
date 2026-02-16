@@ -25,6 +25,19 @@ func normalizeJSON(jsonBytes []byte) (string, error) {
 	return string(normalized), nil
 }
 
+// ProblemDetail implements ContentTypeProvider for testing custom content types.
+type ProblemDetail struct {
+	Type   string `json:"type"`
+	Title  string `json:"title"`
+	Status int    `json:"status"`
+	Detail string `json:"detail"`
+}
+
+// ContentType returns application/problem+json for RFC 7807 Problem Details.
+func (ProblemDetail) ContentType(defaultType string) string {
+	return "application/problem+json"
+}
+
 func TestGenerate_SimpleGET(t *testing.T) {
 	type User struct {
 		ID   int    `json:"id"`
@@ -1175,6 +1188,186 @@ func TestGenerate_MultipleResponseCodes(t *testing.T) {
               }
             },
             "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}`
+
+	assert.Equal(t, expected, normalized)
+}
+
+func TestGenerate_PlainStructResponse(t *testing.T) {
+	type User struct {
+		ID   int    `json:"id"`
+		Name string `json:"name"`
+	}
+
+	type ErrorModel struct {
+		Type   string `json:"type"`
+		Title  string `json:"title"`
+		Status int    `json:"status"`
+	}
+
+	api := NewAPI(
+		WithInfoTitle("Test API"),
+		WithInfoVersion("1.0.0"),
+		WithVersion("3.1.2"),
+	)
+
+	result, err := api.Generate(context.Background(),
+		GET("/users/:id",
+			WithResponse(200, User{}),
+			WithResponse(404, ErrorModel{}),
+			WithResponse(500, ErrorModel{}),
+		),
+	)
+
+	require.NoError(t, err)
+
+	normalized, err := normalizeJSON(result.JSON)
+	require.NoError(t, err)
+
+	expected := `{
+  "components": {
+    "schemas": {
+      "ErrorModel": {
+        "properties": {
+          "status": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "User": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Test API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.2",
+  "paths": {
+    "/users/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}`
+
+	assert.Equal(t, expected, normalized)
+}
+
+func TestGenerate_PlainStructWithContentTypeProvider(t *testing.T) {
+	api := NewAPI(
+		WithInfoTitle("Test API"),
+		WithInfoVersion("1.0.0"),
+		WithVersion("3.1.2"),
+	)
+
+	result, err := api.Generate(context.Background(),
+		GET("/users/:id",
+			WithResponse(422, ProblemDetail{}),
+		),
+	)
+
+	require.NoError(t, err)
+
+	normalized, err := normalizeJSON(result.JSON)
+	require.NoError(t, err)
+
+	expected := `{
+  "components": {
+    "schemas": {
+      "ProblemDetail": {
+        "properties": {
+          "detail": {
+            "type": "string"
+          },
+          "status": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Test API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.2",
+  "paths": {
+    "/users/{id}": {
+      "get": {
+        "responses": {
+          "422": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
           }
         }
       }

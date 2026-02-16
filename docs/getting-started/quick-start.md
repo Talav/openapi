@@ -16,11 +16,16 @@ import (
     "github.com/talav/openapi"
 )
 
-// Domain model
+// Domain models
 type User struct {
     ID    int    `json:"id"`
     Name  string `json:"name"`
     Email string `json:"email"`
+}
+
+type ErrorResponse struct {
+    Message string `json:"message"`
+    Code    string `json:"code"`
 }
 
 // Request types
@@ -41,23 +46,6 @@ type UpdateUserRequest struct {
         Name  string `json:"name"`
         Email string `json:"email" validate:"email"`
     } `body:"structured"`
-}
-
-// Response types
-type GetUserResponse struct {
-    Body User `body:"structured"`
-}
-
-type CreateUserResponse struct {
-    Body User `body:"structured"`
-}
-
-type UpdateUserResponse struct {
-    Body User `body:"structured"`
-}
-
-type ListUsersResponse struct {
-    Body []User `body:"structured"`
 }
 ```
 
@@ -81,31 +69,31 @@ func main() {
         // List users
         openapi.GET("/users",
             openapi.WithSummary("List all users"),
-            openapi.WithResponse(200, ListUsersResponse{}),
+            openapi.WithResponse(200, []User{}),
         ),
         
         // Get user by ID
         openapi.GET("/users/:id",
             openapi.WithSummary("Get user by ID"),
             openapi.WithRequest(GetUserRequest{}),
-            openapi.WithResponse(200, GetUserResponse{}),
-            openapi.WithResponse(404, nil),
+            openapi.WithResponse(200, User{}),
+            openapi.WithResponse(404, ErrorResponse{}),
         ),
         
         // Create user
         openapi.POST("/users",
             openapi.WithSummary("Create new user"),
             openapi.WithRequest(CreateUserRequest{}),
-            openapi.WithResponse(201, CreateUserResponse{}),
-            openapi.WithResponse(400, nil),
+            openapi.WithResponse(201, User{}),
+            openapi.WithResponse(400, ErrorResponse{}),
         ),
         
         // Update user
         openapi.PUT("/users/:id",
             openapi.WithSummary("Update user"),
             openapi.WithRequest(UpdateUserRequest{}),
-            openapi.WithResponse(200, UpdateUserResponse{}),
-            openapi.WithResponse(404, nil),
+            openapi.WithResponse(200, User{}),
+            openapi.WithResponse(404, ErrorResponse{}),
         ),
         
         // Delete user
@@ -113,7 +101,7 @@ func main() {
             openapi.WithSummary("Delete user"),
             openapi.WithRequest(GetUserRequest{}),
             openapi.WithResponse(204, nil),
-            openapi.WithResponse(404, nil),
+            openapi.WithResponse(404, ErrorResponse{}),
         ),
     )
     
@@ -132,6 +120,7 @@ The generated specification includes everything you'd expect:
 
 - **Path parameters** from `:id` in URLs
 - **Request bodies** from `body:"structured"` tags
+- **Response schemas** from plain structs or wrapped types
 - **Schema constraints** from `validate` tags
 - **Component schemas** for reusable types
 - **Multiple responses** with status codes

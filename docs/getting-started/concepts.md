@@ -152,15 +152,112 @@ type CreatePostRequest struct {
 
 ### Response Structs
 
-Response structs typically have a body and optional headers:
+Response structs can use either pattern:
+
+**Simple pattern** - the struct is the response body:
 
 ```go
-type CreatePostResponse struct {
-    Location string `schema:"Location,location=header"` // Response header
-    Body struct {
-        ID        int    `json:"id"`
-        CreatedAt string `json:"created_at"`
-    } `body:"structured"` // Response body
+type User struct {
+    ID   int    `json:"id"`
+    Name string `json:"name"`
+}
+
+openapi.WithResponse(200, User{}) // User becomes the response schema
+```
+
+**Advanced pattern** - use body tag for headers:
+
+```go
+type UserResponse struct {
+    ETag string `schema:"ETag,location=header"` // Response header
+    Body User   `body:"structured"`              // Response body
+}
+
+openapi.WithResponse(200, UserResponse{}) // Includes headers
+```
+
+## Response Patterns
+
+The library supports two patterns for responses:
+
+### Simple Pattern (Most Common)
+
+Pass your response struct directly - the entire struct becomes the response body:
+
+```go
+type User struct {
+    ID   int    `json:"id"`
+    Name string `json:"name"`
+}
+
+type ErrorResponse struct {
+    Message string `json:"message"`
+    Code    string `json:"code"`
+}
+
+openapi.GET("/users/:id",
+    openapi.WithResponse(200, User{}),           // ✅ Simple
+    openapi.WithResponse(404, ErrorResponse{}),  // ✅ Simple
+)
+```
+
+### Advanced Pattern (With Response Headers)
+
+Use the `body` tag wrapper when you need to include response headers:
+
+```go
+type UserWithHeaders struct {
+    ETag         string `schema:"ETag,location=header"`
+    CacheControl string `schema:"Cache-Control,location=header"`
+    Body         User   `body:"structured"`
+}
+
+openapi.GET("/users/:id",
+    openapi.WithResponse(200, UserWithHeaders{}), // Includes headers
+)
+```
+
+Use the wrapper pattern only when you need response headers. For standard responses, use the simple pattern.
+
+### Custom Content Types
+
+By default, responses use `application/json`. To return a different content type, implement the `ContentTypeProvider` interface on your response struct:
+
+```go
+type ProblemDetail struct {
+    Type   string `json:"type"`
+    Title  string `json:"title"`
+    Status int    `json:"status"`
+    Detail string `json:"detail"`
+}
+
+// ContentTypeProvider interface
+func (ProblemDetail) ContentType(defaultType string) string {
+    return "application/problem+json"
+}
+
+openapi.GET("/users/:id",
+    openapi.WithResponse(404, ProblemDetail{}),
+)
+```
+
+The generated OpenAPI spec will use `application/problem+json` instead of `application/json` for this response.
+
+**Common use cases:**
+
+- RFC 7807 Problem Details: `application/problem+json`
+- HAL responses: `application/hal+json`
+- JSON:API: `application/vnd.api+json`
+- Custom vendor types: `application/vnd.myapp+json`
+
+The method receives the default content type as a parameter, allowing conditional logic:
+
+```go
+func (r APIResponse) ContentType(defaultType string) string {
+    if r.IsError {
+        return "application/problem+json"
+    }
+    return defaultType // Use default application/json
 }
 ```
 
@@ -211,13 +308,13 @@ type User struct {
     Name string `json:"name"`
 }
 
-type CreateUserRequest struct {
-    Body User `body:"structured"`
-}
-
-type GetUserResponse struct {
-    Body User `body:"structured"`
-}
+// User appears in both operations
+openapi.POST("/users",
+    openapi.WithResponse(201, User{}),
+),
+openapi.GET("/users/:id",
+    openapi.WithResponse(200, User{}),
+)
 ```
 
 `User` appears once in `components/schemas` and is referenced from both operations.

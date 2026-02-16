@@ -44,6 +44,11 @@ type User struct {
     Email string `json:"email"`
 }
 
+type ErrorResponse struct {
+    Message string `json:"message"`
+    Code    string `json:"code"`
+}
+
 type CreateUserRequest struct {
     Body struct {
         Name  string `json:"name" validate:"required"`
@@ -64,12 +69,14 @@ func main() {
         openapi.GET("/users/:id",
             openapi.WithSummary("Get user"),
             openapi.WithResponse(200, User{}),
+            openapi.WithResponse(404, ErrorResponse{}),
             openapi.WithSecurity("bearerAuth"),
         ),
         openapi.POST("/users",
             openapi.WithSummary("Create user"),
             openapi.WithRequest(CreateUserRequest{}),
             openapi.WithResponse(201, User{}),
+            openapi.WithResponse(400, ErrorResponse{}),
         ),
         openapi.DELETE("/users/:id",
             openapi.WithSummary("Delete user"),
