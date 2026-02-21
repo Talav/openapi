@@ -25,19 +25,6 @@ func normalizeJSON(jsonBytes []byte) (string, error) {
 	return string(normalized), nil
 }
 
-// ProblemDetail implements ContentTypeProvider for testing custom content types.
-type ProblemDetail struct {
-	Type   string `json:"type"`
-	Title  string `json:"title"`
-	Status int    `json:"status"`
-	Detail string `json:"detail"`
-}
-
-// ContentType returns application/problem+json for RFC 7807 Problem Details.
-func (ProblemDetail) ContentType(defaultType string) string {
-	return "application/problem+json"
-}
-
 func TestGenerate_SimpleGET(t *testing.T) {
 	type User struct {
 		ID   int    `json:"id"`
@@ -1307,6 +1294,19 @@ func TestGenerate_PlainStructResponse(t *testing.T) {
 }`
 
 	assert.Equal(t, expected, normalized)
+}
+
+// ProblemDetail implements ContentTypeProvider for testing custom content types.
+type ProblemDetail struct {
+	Type   string `json:"type"`
+	Title  string `json:"title"`
+	Status int    `json:"status"`
+	Detail string `json:"detail"`
+}
+
+// ContentType returns application/problem+json for RFC 7807 Problem Details.
+func (ProblemDetail) ContentType(defaultType string) string {
+	return "application/problem+json"
 }
 
 func TestGenerate_PlainStructWithContentTypeProvider(t *testing.T) {

@@ -311,7 +311,10 @@ func WithRequest(req any, examples ...example.Example) OperationDocOption {
 //	openapi.GET("/users/:id",
 //	    openapi.WithResponse(200, User{},
 //	        example.New("success", User{ID: 1, Name: "John"}),
-//	        example.New("admin", User{ID: 2, Name: "Admin"}),
+//	        example.New("admin", User{ID: 2, Name: "Admin"},
+//	            example.WithSummary("Admin user"),
+//	            example.WithDescription("User with elevated permissions"),
+//	        ),
 //	    ),
 //	)
 func WithResponse(status int, resp any, examples ...example.Example) OperationDocOption {

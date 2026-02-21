@@ -4,7 +4,7 @@ import (
 	"reflect"
 
 	"github.com/talav/openapi/config"
-	"github.com/talav/openapi/internal/metadata"
+	"github.com/talav/openapi/metadata"
 	"github.com/talav/schema"
 )
 

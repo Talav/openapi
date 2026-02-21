@@ -13,8 +13,8 @@ import (
 
 	"github.com/talav/openapi/config"
 	"github.com/talav/openapi/hook"
-	"github.com/talav/openapi/internal/metadata"
 	"github.com/talav/openapi/internal/model"
+	"github.com/talav/openapi/metadata"
 	"github.com/talav/schema"
 )
 
