@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1097,42 +1097,42 @@
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;context&quot;</span>
-<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">"context"</span>
+<span class="w">    </span><span class="s">"fmt"</span>
 
-<span class="w">    </span><span class="s">&quot;github.com/talav/openapi&quot;</span>
+<span class="w">    </span><span class="s">"github.com/talav/openapi"</span>
 <span class="p">)</span>
 
 <span class="c1">// Domain models</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">    </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;id&quot;`</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
-<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;email&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">    </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"id"`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name"`</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"email"`</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">ErrorResponse</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Message</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;message&quot;`</span>
-<span class="w">    </span><span class="nx">Code</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;code&quot;`</span>
+<span class="w">    </span><span class="nx">Message</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"message"`</span>
+<span class="w">    </span><span class="nx">Code</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"code"`</span>
 <span class="p">}</span>
 
 <span class="c1">// Request types</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">GetUserRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:&quot;id,location=path&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:"id,location=path"`</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">CreateUserRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot; validate:&quot;required,min=3&quot;`</span>
-<span class="w">        </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;email&quot; validate:&quot;required,email&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span>
+<span class="w">        </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name" validate:"required,min=3"`</span>
+<span class="w">        </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"email" validate:"required,email"`</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:"structured"`</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">UpdateUserRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:&quot;id,location=path&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:"id,location=path"`</span>
 <span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
-<span class="w">        </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;email&quot; validate:&quot;email&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span>
+<span class="w">        </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name"`</span>
+<span class="w">        </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"email" validate:"email"`</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:"structured"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="generate-the-specification">Generate the Specification<a class="headerlink" href="#generate-the-specification" title="Anchor link to this section">&para;</a></h2>
@@ -1140,48 +1140,48 @@
 <div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Create API with metadata</span>
 <span class="w">    </span><span class="nx">api</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">NewAPI</span><span class="p">(</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoTitle</span><span class="p">(</span><span class="s">&quot;User Management API&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoVersion</span><span class="p">(</span><span class="s">&quot;1.0.0&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoDescription</span><span class="p">(</span><span class="s">&quot;CRUD operations for user management&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithServer</span><span class="p">(</span><span class="s">&quot;https://api.example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Production&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithServer</span><span class="p">(</span><span class="s">&quot;http://localhost:8080&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Development&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoTitle</span><span class="p">(</span><span class="s">"User Management API"</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoVersion</span><span class="p">(</span><span class="s">"1.0.0"</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoDescription</span><span class="p">(</span><span class="s">"CRUD operations for user management"</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithServer</span><span class="p">(</span><span class="s">"https://api.example.com"</span><span class="p">,</span><span class="w"> </span><span class="s">"Production"</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithServer</span><span class="p">(</span><span class="s">"http://localhost:8080"</span><span class="p">,</span><span class="w"> </span><span class="s">"Development"</span><span class="p">),</span>
 <span class="w">    </span><span class="p">)</span>
 
 <span class="w">    </span><span class="c1">// Generate spec from operations</span>
 <span class="w">    </span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">api</span><span class="p">.</span><span class="nx">Generate</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span>
 <span class="w">        </span><span class="c1">// List users</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;List all users&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"List all users"</span><span class="p">),</span>
 <span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="p">[]</span><span class="nx">User</span><span class="p">{}),</span>
 <span class="w">        </span><span class="p">),</span>
 
 <span class="w">        </span><span class="c1">// Get user by ID</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users/:id&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;Get user by ID&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/users/:id"</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"Get user by ID"</span><span class="p">),</span>
 <span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">GetUserRequest</span><span class="p">{}),</span>
 <span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
 <span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="nx">ErrorResponse</span><span class="p">{}),</span>
 <span class="w">        </span><span class="p">),</span>
 
 <span class="w">        </span><span class="c1">// Create user</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;Create new user&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"Create new user"</span><span class="p">),</span>
 <span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">CreateUserRequest</span><span class="p">{}),</span>
 <span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
 <span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nx">ErrorResponse</span><span class="p">{}),</span>
 <span class="w">        </span><span class="p">),</span>
 
 <span class="w">        </span><span class="c1">// Update user</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">PUT</span><span class="p">(</span><span class="s">&quot;/users/:id&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;Update user&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">PUT</span><span class="p">(</span><span class="s">"/users/:id"</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"Update user"</span><span class="p">),</span>
 <span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">UpdateUserRequest</span><span class="p">{}),</span>
 <span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
 <span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="nx">ErrorResponse</span><span class="p">{}),</span>
 <span class="w">        </span><span class="p">),</span>
 
 <span class="w">        </span><span class="c1">// Delete user</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">DELETE</span><span class="p">(</span><span class="s">&quot;/users/:id&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;Delete user&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">DELETE</span><span class="p">(</span><span class="s">"/users/:id"</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"Delete user"</span><span class="p">),</span>
 <span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">GetUserRequest</span><span class="p">{}),</span>
 <span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">204</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">),</span>
 <span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="nx">ErrorResponse</span><span class="p">{}),</span>
@@ -1193,7 +1193,7 @@
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Save to file</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">JSON</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">JSON</span><span class="p">))</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="understanding-the-output">Understanding the Output<a class="headerlink" href="#understanding-the-output" title="Anchor link to this section">&para;</a></h2>
@@ -1208,33 +1208,33 @@
 </ul>
 <p>Here's the structure:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;openapi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.1.2&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;User Management API&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CRUD operations for user management&quot;</span>
+<span class="w">  </span><span class="nt">"openapi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.1.2"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User Management API"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRUD operations for user management"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;servers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="nt">"servers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Production&quot;</span>
+<span class="w">      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.example.com"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Production"</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;paths&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;/users&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;get&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;post&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="nt">"paths"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"/users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"get"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">"post"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;/users/{id}&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;get&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;put&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;delete&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="nt">"/users/{id}"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"get"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">"put"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">"delete"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;components&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;schemas&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;User&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;CreateUserRequestBody&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="nt">"components"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">"CreateUserRequestBody"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
@@ -1242,16 +1242,16 @@
 <h2 id="adding-security">Adding Security<a class="headerlink" href="#adding-security" title="Anchor link to this section">&para;</a></h2>
 <p>Protect endpoints with authentication:</p>
 <div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">NewAPI</span><span class="p">(</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoTitle</span><span class="p">(</span><span class="s">&quot;User API&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoVersion</span><span class="p">(</span><span class="s">&quot;1.0.0&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithBearerAuth</span><span class="p">(</span><span class="s">&quot;bearerAuth&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;JWT authentication&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoTitle</span><span class="p">(</span><span class="s">"User API"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoVersion</span><span class="p">(</span><span class="s">"1.0.0"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithBearerAuth</span><span class="p">(</span><span class="s">"bearerAuth"</span><span class="p">,</span><span class="w"> </span><span class="s">"JWT authentication"</span><span class="p">),</span>
 <span class="p">)</span>
 
 <span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">api</span><span class="p">.</span><span class="nx">Generate</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">CreateUserRequest</span><span class="p">{}),</span>
 <span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">&quot;bearerAuth&quot;</span><span class="p">),</span><span class="w"> </span><span class="c1">// Requires auth</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">"bearerAuth"</span><span class="p">),</span><span class="w"> </span><span class="c1">// Requires auth</span>
 <span class="w">    </span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -1380,10 +1380,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       

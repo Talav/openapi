@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -954,6 +954,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#validators-without-an-openapi-equivalent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validators Without an OpenAPI Equivalent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1325,160 +1336,160 @@
 <h2 id="string-validation">String Validation<a class="headerlink" href="#string-validation" title="Anchor link to this section">&para;</a></h2>
 <h3 id="required-fields">Required Fields<a class="headerlink" href="#required-fields" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot; validate:&quot;required&quot;`</span>
-<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;email&quot; validate:&quot;required,email&quot;`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name" validate:"required"`</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"email" validate:"required,email"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Generates:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="w"> </span><span class="p">}</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"email"</span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="length-constraints">Length Constraints<a class="headerlink" href="#length-constraints" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;username&quot; validate:&quot;min=3,max=20&quot;`</span>
-<span class="w">    </span><span class="nx">Bio</span><span class="w">      </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;bio&quot; validate:&quot;max=500&quot;`</span>
-<span class="w">    </span><span class="nx">Code</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;code&quot; validate:&quot;len=6&quot;`</span><span class="w"> </span><span class="c1">// Exact length</span>
+<span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"username" validate:"min=3,max=20"`</span>
+<span class="w">    </span><span class="nx">Bio</span><span class="w">      </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"bio" validate:"max=500"`</span>
+<span class="w">    </span><span class="nx">Code</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"code" validate:"len=6"`</span><span class="w"> </span><span class="c1">// Exact length</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Becomes:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;minLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;maxLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span>
+<span class="w">  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;bio&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;maxLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span>
+<span class="w">  </span><span class="nt">"bio"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;minLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;maxLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span>
+<span class="w">  </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="format-validation">Format Validation<a class="headerlink" href="#format-validation" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Contact</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;email&quot; validate:&quot;email&quot;`</span>
-<span class="w">    </span><span class="nx">URL</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;url&quot; validate:&quot;url&quot;`</span>
-<span class="w">    </span><span class="nx">Phone</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;phone&quot; validate:&quot;e164&quot;`</span><span class="w"> </span><span class="c1">// E.164 phone format</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"email" validate:"email"`</span>
+<span class="w">    </span><span class="nx">URL</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"url" validate:"url"`</span>
+<span class="w">    </span><span class="nx">Phone</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"phone" validate:"e164"`</span><span class="w"> </span><span class="c1">// E.164 phone format</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Maps to OpenAPI formats:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;email&quot;</span>
+<span class="w">  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uri&quot;</span>
+<span class="w">  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uri"</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="pattern-matching">Pattern Matching<a class="headerlink" href="#pattern-matching" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Product</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">SKU</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;sku&quot; validate:&quot;pattern=^[A-Z]{3}-[0-9]{4}$&quot;`</span>
-<span class="w">    </span><span class="nx">Slug</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;slug&quot; validate:&quot;pattern=^[a-z0-9-]+$&quot;`</span>
+<span class="w">    </span><span class="nx">SKU</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"sku" validate:"pattern=^[A-Z]{3}-[0-9]{4}$"`</span>
+<span class="w">    </span><span class="nx">Slug</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"slug" validate:"pattern=^[a-z0-9-]+$"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="numeric-validation">Numeric Validation<a class="headerlink" href="#numeric-validation" title="Anchor link to this section">&para;</a></h2>
 <h3 id="range-constraints">Range Constraints<a class="headerlink" href="#range-constraints" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Product</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Price</span><span class="w">    </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;price&quot; validate:&quot;min=0,max=10000&quot;`</span>
-<span class="w">    </span><span class="nx">Quantity</span><span class="w"> </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:&quot;quantity&quot; validate:&quot;min=1&quot;`</span>
-<span class="w">    </span><span class="nx">Rating</span><span class="w">   </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;rating&quot; validate:&quot;min=0,max=5&quot;`</span>
-<span class="w">    </span><span class="nx">Age</span><span class="w">      </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:&quot;age&quot; validate:&quot;min=18,max=120&quot;`</span>
+<span class="w">    </span><span class="nx">Price</span><span class="w">    </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:"price" validate:"min=0,max=10000"`</span>
+<span class="w">    </span><span class="nx">Quantity</span><span class="w"> </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:"quantity" validate:"min=1"`</span>
+<span class="w">    </span><span class="nx">Rating</span><span class="w">   </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:"rating" validate:"min=0,max=5"`</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">      </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:"age" validate:"min=18,max=120"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Generates:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span>
+<span class="w">  </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"minimum"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"maximum"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"minimum"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="exclusive-bounds">Exclusive Bounds<a class="headerlink" href="#exclusive-bounds" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Range</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Value</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="s">`json:&quot;value&quot; validate:&quot;gt=0,lt=100&quot;`</span><span class="w"> </span><span class="c1">// 0 &lt; value &lt; 100</span>
+<span class="w">    </span><span class="nx">Value</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="s">`json:"value" validate:"gt=0,lt=100"`</span><span class="w"> </span><span class="c1">// 0 &lt; value &lt; 100</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Becomes:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;exclusiveMinimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;exclusiveMaximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">  </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"exclusiveMinimum"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"exclusiveMaximum"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="multiple-of">Multiple Of<a class="headerlink" href="#multiple-of" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Measurement</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Increment</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;increment&quot; validate:&quot;multipleOf=0.5&quot;`</span>
-<span class="w">    </span><span class="nx">Count</span><span class="w">     </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:&quot;count&quot; validate:&quot;multipleOf=10&quot;`</span>
+<span class="w">    </span><span class="nx">Increment</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:"increment" validate:"multipleOf=0.5"`</span>
+<span class="w">    </span><span class="nx">Count</span><span class="w">     </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:"count" validate:"multipleOf=10"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="array-validation">Array Validation<a class="headerlink" href="#array-validation" title="Anchor link to this section">&para;</a></h2>
 <h3 id="size-constraints">Size Constraints<a class="headerlink" href="#size-constraints" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Form</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Tags</span><span class="w">       </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;tags&quot; validate:&quot;min=1,max=5&quot;`</span>
-<span class="w">    </span><span class="nx">Signatures</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;signatures&quot; validate:&quot;min=2&quot;`</span>
-<span class="w">    </span><span class="nx">Options</span><span class="w">    </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;options&quot; validate:&quot;len=3&quot;`</span><span class="w"> </span><span class="c1">// Exactly 3</span>
+<span class="w">    </span><span class="nx">Tags</span><span class="w">       </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"tags" validate:"min=1,max=5"`</span>
+<span class="w">    </span><span class="nx">Signatures</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"signatures" validate:"min=2"`</span>
+<span class="w">    </span><span class="nx">Options</span><span class="w">    </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"options" validate:"len=3"`</span><span class="w"> </span><span class="c1">// Exactly 3</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Generates:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;minItems&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;maxItems&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">  </span><span class="nt">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"minItems"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"maxItems"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="unique-items">Unique Items<a class="headerlink" href="#unique-items" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">List</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">UniqueIDs</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="w"> </span><span class="s">`json:&quot;unique_ids&quot; validate:&quot;unique&quot;`</span>
+<span class="w">    </span><span class="nx">UniqueIDs</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="w"> </span><span class="s">`json:"unique_ids" validate:"unique"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="enum-validation">Enum Validation<a class="headerlink" href="#enum-validation" title="Anchor link to this section">&para;</a></h2>
 <h3 id="string-enums">String Enums<a class="headerlink" href="#string-enums" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Order</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Status</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;status&quot; validate:&quot;oneof=pending processing shipped delivered&quot;`</span>
+<span class="w">    </span><span class="nx">Status</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"status" validate:"oneof=pending processing shipped delivered"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Becomes:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pending&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;processing&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;shipped&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;delivered&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"pending"</span><span class="p">,</span><span class="w"> </span><span class="s2">"processing"</span><span class="p">,</span><span class="w"> </span><span class="s2">"shipped"</span><span class="p">,</span><span class="w"> </span><span class="s2">"delivered"</span><span class="p">]</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="numeric-enums">Numeric Enums<a class="headerlink" href="#numeric-enums" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Priority</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Level</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="s">`json:&quot;level&quot; validate:&quot;oneof=1 2 3 4 5&quot;`</span>
+<span class="w">    </span><span class="nx">Level</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="s">`json:"level" validate:"oneof=1 2 3 4 5"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="combining-validators">Combining Validators<a class="headerlink" href="#combining-validators" title="Anchor link to this section">&para;</a></h2>
 <p>Multiple validation rules work together:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Email</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;email&quot; validate:&quot;required,email,max=100&quot;`</span>
-<span class="w">    </span><span class="nx">Age</span><span class="w">      </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;age&quot; validate:&quot;required,min=18,max=120&quot;`</span>
-<span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;username&quot; validate:&quot;required,min=3,max=20,pattern=^[a-z0-9_]+$&quot;`</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"email" validate:"required,email,max=100"`</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">      </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"age" validate:"required,min=18,max=120"`</span>
+<span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"username" validate:"required,min=3,max=20,pattern=^[a-z0-9_]+$"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="validation-mapping-reference">Validation Mapping Reference<a class="headerlink" href="#validation-mapping-reference" title="Anchor link to this section">&para;</a></h2>
@@ -1577,23 +1588,23 @@
 <p>You can override validation-derived required status:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Required by validate, but optional in OpenAPI docs</span>
-<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;email&quot; validate:&quot;required&quot; openapi:&quot;required=false&quot;`</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"email" validate:"required" openapi:"required=false"`</span>
 
 <span class="w">    </span><span class="c1">// Optional in code, but required in OpenAPI docs</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot; openapi:&quot;required&quot;`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name" openapi:"required"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="nested-validation">Nested Validation<a class="headerlink" href="#nested-validation" title="Anchor link to this section">&para;</a></h2>
 <p>Validation works on nested structs:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">    </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;name&quot; validate:&quot;required&quot;`</span>
-<span class="w">    </span><span class="nx">Address</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="s">`json:&quot;address&quot; validate:&quot;required&quot;`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">    </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:"name" validate:"required"`</span>
+<span class="w">    </span><span class="nx">Address</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="s">`json:"address" validate:"required"`</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Street</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;street&quot; validate:&quot;required&quot;`</span>
-<span class="w">    </span><span class="nx">City</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;city&quot; validate:&quot;required&quot;`</span>
-<span class="w">    </span><span class="nx">Zip</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;zip&quot; validate:&quot;required,len=5&quot;`</span>
+<span class="w">    </span><span class="nx">Street</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"street" validate:"required"`</span>
+<span class="w">    </span><span class="nx">City</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"city" validate:"required"`</span>
+<span class="w">    </span><span class="nx">Zip</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"zip" validate:"required,len=5"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>All validation rules propagate to the generated schema.</p>
@@ -1601,19 +1612,27 @@
 <h3 id="conditional-required">Conditional Required<a class="headerlink" href="#conditional-required" title="Anchor link to this section">&para;</a></h3>
 <p>Use the <code>requires</code> tag for fields that become required when another field is present:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Payment</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Method</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;method&quot;`</span>
-<span class="w">    </span><span class="nx">CardNumber</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;card_number&quot; requires:&quot;cvv,expiry&quot;`</span>
-<span class="w">    </span><span class="nx">CVV</span><span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;cvv&quot;`</span>
-<span class="w">    </span><span class="nx">Expiry</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;expiry&quot;`</span>
+<span class="w">    </span><span class="nx">Method</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"method"`</span>
+<span class="w">    </span><span class="nx">CardNumber</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"card_number" requires:"cvv,expiry"`</span>
+<span class="w">    </span><span class="nx">CVV</span><span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"cvv"`</span>
+<span class="w">    </span><span class="nx">Expiry</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"expiry"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>In OpenAPI 3.1, this uses <code>dependentRequired</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;dependentRequired&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;card_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;cvv&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;expiry&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="nt">"dependentRequired"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"card_number"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cvv"</span><span class="p">,</span><span class="w"> </span><span class="s2">"expiry"</span><span class="p">]</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<h2 id="validators-without-an-openapi-equivalent">Validators Without an OpenAPI Equivalent<a class="headerlink" href="#validators-without-an-openapi-equivalent" title="Anchor link to this section">&para;</a></h2>
+<p>Only validators that map to an OpenAPI keyword appear in the schema. Any other validator is skipped: built-in ones such as <code>omitempty</code>, <code>uuid</code>, <code>dive</code> or <code>required_if</code>, and custom validators you register yourself. They still run at validation time; they are just not described in the document.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Signup</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"email" validate:"omitempty,email"`</span><span class="w">      </span><span class="c1">// format: email</span>
+<span class="w">    </span><span class="nx">Password</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"password" validate:"required,password"`</span><span class="w"> </span><span class="c1">// required; "password" is skipped</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A mapped validator with an invalid value, such as <code>min=abc</code>, is still an error.</p>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Anchor link to this section">&para;</a></h2>
 <ul>
 <li><a href="../metadata/">Metadata</a> - Add descriptions, examples, and more</li>
@@ -1641,7 +1660,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="February 15, 2026 03:54:14 UTC"><span class="timeago" datetime="2026-02-15T03:54:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="February 15, 2026 03:54:14 UTC">2026-02-15</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="November 17, 2026 05:48:16 UTC"><span class="timeago" datetime="2026-11-17T05:48:16+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="November 17, 2026 05:48:16 UTC">2026-11-17</span>
   </span>
 
     
@@ -1737,10 +1756,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       

@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -29,10 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1102,32 +1102,32 @@ It does <strong>not</strong> expose a public API for registering arbitrary custo
 <li><code>default</code></li>
 <li><code>requires</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/talav/openapi/config&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">"github.com/talav/openapi/config"</span>
 
 <span class="nx">api</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">NewAPI</span><span class="p">(</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithTagConfig</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">TagConfig</span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Schema</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;param&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Body</span><span class="p">:</span><span class="w">     </span><span class="s">&quot;payload&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">OpenAPI</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;api&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Validate</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;rules&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Default</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;def&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Requires</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;needs&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Schema</span><span class="p">:</span><span class="w">   </span><span class="s">"param"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Body</span><span class="p">:</span><span class="w">     </span><span class="s">"payload"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">OpenAPI</span><span class="p">:</span><span class="w">  </span><span class="s">"api"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Validate</span><span class="p">:</span><span class="w"> </span><span class="s">"rules"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Default</span><span class="p">:</span><span class="w">  </span><span class="s">"def"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Requires</span><span class="p">:</span><span class="w"> </span><span class="s">"needs"</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}),</span>
 <span class="p">)</span>
 </code></pre></div>
 <p>Then your structs use those names:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Request</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">  </span><span class="s">`param:&quot;id,location=path&quot;`</span>
-<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="s">`payload:&quot;structured&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">  </span><span class="s">`param:"id,location=path"`</span>
+<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="s">`payload:"structured"`</span>
 
-<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot; rules:&quot;required&quot; api:&quot;description=User name&quot;`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name" rules:"required" api:"description=User name"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="partial-configuration">Partial Configuration<a class="headerlink" href="#partial-configuration" title="Anchor link to this section">&para;</a></h2>
 <p>You only need to set fields you want to override:</p>
 <div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">NewAPI</span><span class="p">(</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithTagConfig</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">TagConfig</span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Validate</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;rules&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Validate</span><span class="p">:</span><span class="w"> </span><span class="s">"rules"</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}),</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -1135,12 +1135,12 @@ It does <strong>not</strong> expose a public API for registering arbitrary custo
 <h2 id="default-tag-names">Default Tag Names<a class="headerlink" href="#default-tag-names" title="Anchor link to this section">&para;</a></h2>
 <p>By default:</p>
 <div class="highlight"><pre><span></span><code><span class="nx">config</span><span class="p">.</span><span class="nx">DefaultTagConfig</span><span class="p">()</span>
-<span class="c1">// Schema: &quot;schema&quot;</span>
-<span class="c1">// Body: &quot;body&quot;</span>
-<span class="c1">// OpenAPI: &quot;openapi&quot;</span>
-<span class="c1">// Validate: &quot;validate&quot;</span>
-<span class="c1">// Default: &quot;default&quot;</span>
-<span class="c1">// Requires: &quot;requires&quot;</span>
+<span class="c1">// Schema: "schema"</span>
+<span class="c1">// Body: "body"</span>
+<span class="c1">// OpenAPI: "openapi"</span>
+<span class="c1">// Validate: "validate"</span>
+<span class="c1">// Default: "default"</span>
+<span class="c1">// Requires: "requires"</span>
 </code></pre></div>
 <h2 id="when-custom-tags-make-sense">When Custom Tags Make Sense<a class="headerlink" href="#when-custom-tags-make-sense" title="Anchor link to this section">&para;</a></h2>
 <ul>
@@ -1149,17 +1149,17 @@ It does <strong>not</strong> expose a public API for registering arbitrary custo
 </ul>
 <p>Example conflict resolution:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`validate:&quot;custom_email_rule&quot;`</span><span class="w"> </span><span class="c1">// Existing library usage</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`validate:"custom_email_rule"`</span><span class="w"> </span><span class="c1">// Existing library usage</span>
 <span class="p">}</span>
 
 <span class="nx">api</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">NewAPI</span><span class="p">(</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithTagConfig</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">TagConfig</span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Validate</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;openapi_validate&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Validate</span><span class="p">:</span><span class="w"> </span><span class="s">"openapi_validate"</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}),</span>
 <span class="p">)</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`validate:&quot;custom_email_rule&quot; openapi_validate:&quot;required,email&quot;`</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`validate:"custom_email_rule" openapi_validate:"required,email"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="what-is-not-publicly-exposed">What Is Not Publicly Exposed<a class="headerlink" href="#what-is-not-publicly-exposed" title="Anchor link to this section">&para;</a></h2>
@@ -1286,10 +1286,10 @@ It does <strong>not</strong> expose a public API for registering arbitrary custo
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       

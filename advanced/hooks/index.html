@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1296,18 +1296,18 @@
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="basic-example">Basic Example<a class="headerlink" href="#basic-example" title="Anchor link to this section">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/talav/openapi/hook&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">"github.com/talav/openapi/hook"</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;id&quot;`</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"id"`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">User</span><span class="p">)</span><span class="w"> </span><span class="nx">TransformSchema</span><span class="p">(</span><span class="nx">schema</span><span class="w"> </span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Add a custom property</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Extensions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;x-resource-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;user&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;x-searchable&quot;</span><span class="p">:</span><span class="w">    </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Extensions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">        </span><span class="s">"x-resource-type"</span><span class="p">:</span><span class="w"> </span><span class="s">"user"</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"x-searchable"</span><span class="p">:</span><span class="w">    </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">schema</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
@@ -1316,25 +1316,25 @@
 <p>Now when <code>User</code> is used, the generated schema includes your extensions.</p>
 <h3 id="modifying-properties">Modifying Properties<a class="headerlink" href="#modifying-properties" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Product</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">    </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:&quot;id&quot;`</span>
-<span class="w">    </span><span class="nx">Price</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;price&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">    </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:"id"`</span>
+<span class="w">    </span><span class="nx">Price</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:"price"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Product</span><span class="p">)</span><span class="w"> </span><span class="nx">TransformSchema</span><span class="p">(</span><span class="nx">schema</span><span class="w"> </span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Add currency information to price field</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">priceSchema</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Properties</span><span class="p">[</span><span class="s">&quot;price&quot;</span><span class="p">];</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">priceSchema</span><span class="p">.</span><span class="nx">Extensions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;x-currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;USD&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">priceSchema</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Properties</span><span class="p">[</span><span class="s">"price"</span><span class="p">];</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">priceSchema</span><span class="p">.</span><span class="nx">Extensions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"x-currency"</span><span class="p">:</span><span class="w"> </span><span class="s">"USD"</span><span class="p">,</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Add computed field</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Properties</span><span class="p">[</span><span class="s">&quot;price_formatted&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Formatted price with currency symbol&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Examples</span><span class="p">:</span><span class="w">    </span><span class="p">[]</span><span class="kt">any</span><span class="p">{</span><span class="s">&quot;$9.99&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="nx">Extensions</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;x-computed&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Properties</span><span class="p">[</span><span class="s">"price_formatted"</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">"string"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">"Formatted price with currency symbol"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Examples</span><span class="p">:</span><span class="w">    </span><span class="p">[]</span><span class="kt">any</span><span class="p">{</span><span class="s">"$9.99"</span><span class="p">},</span>
+<span class="w">        </span><span class="nx">Extensions</span><span class="p">:</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"x-computed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -1352,17 +1352,17 @@
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">CustomID</span><span class="p">)</span><span class="w"> </span><span class="nx">ProvideSchema</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Format</span><span class="p">:</span><span class="w">      </span><span class="s">&quot;uuid&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Pattern</span><span class="p">:</span><span class="w">     </span><span class="s">&quot;^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;UUID v4 identifier&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Examples</span><span class="p">:</span><span class="w">    </span><span class="p">[]</span><span class="kt">any</span><span class="p">{</span><span class="s">&quot;550e8400-e29b-41d4-a716-446655440000&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">"string"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Format</span><span class="p">:</span><span class="w">      </span><span class="s">"uuid"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Pattern</span><span class="p">:</span><span class="w">     </span><span class="s">"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">"UUID v4 identifier"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Examples</span><span class="p">:</span><span class="w">    </span><span class="p">[]</span><span class="kt">any</span><span class="p">{</span><span class="s">"550e8400-e29b-41d4-a716-446655440000"</span><span class="p">},</span>
 <span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="kc">nil</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="nx">CustomID</span><span class="w"> </span><span class="s">`json:&quot;id&quot;`</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w">   </span><span class="s">`json:&quot;name&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="nx">CustomID</span><span class="w"> </span><span class="s">`json:"id"`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w">   </span><span class="s">`json:"name"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>The <code>ID</code> field will use your custom schema instead of the default string schema.</p>
@@ -1371,16 +1371,16 @@
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Status</span><span class="w"> </span><span class="kt">int</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="nx">StatusPending</span><span class="w"> </span><span class="nx">Status</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span>
+<span class="w">    </span><span class="nx">StatusPending</span><span class="w"> </span><span class="nx">Status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">iota</span>
 <span class="w">    </span><span class="nx">StatusActive</span>
 <span class="w">    </span><span class="nx">StatusClosed</span>
 <span class="p">)</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Status</span><span class="p">)</span><span class="w"> </span><span class="nx">ProvideSchema</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Enum</span><span class="p">:</span><span class="w">        </span><span class="p">[]</span><span class="kt">any</span><span class="p">{</span><span class="s">&quot;pending&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;active&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;closed&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Status of the resource&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">"string"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Enum</span><span class="p">:</span><span class="w">        </span><span class="p">[]</span><span class="kt">any</span><span class="p">{</span><span class="s">"pending"</span><span class="p">,</span><span class="w"> </span><span class="s">"active"</span><span class="p">,</span><span class="w"> </span><span class="s">"closed"</span><span class="p">},</span>
+<span class="w">        </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">"Status of the resource"</span><span class="p">,</span>
 <span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="kc">nil</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1389,42 +1389,42 @@
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Timestamp</span><span class="p">)</span><span class="w"> </span><span class="nx">ProvideSchema</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Format</span><span class="p">:</span><span class="w">      </span><span class="s">&quot;date-time&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ISO 8601 timestamp&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Examples</span><span class="p">:</span><span class="w">    </span><span class="p">[]</span><span class="kt">any</span><span class="p">{</span><span class="s">&quot;2024-03-15T10:30:00Z&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">"string"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Format</span><span class="p">:</span><span class="w">      </span><span class="s">"date-time"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">"ISO 8601 timestamp"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Examples</span><span class="p">:</span><span class="w">    </span><span class="p">[]</span><span class="kt">any</span><span class="p">{</span><span class="s">"2024-03-15T10:30:00Z"</span><span class="p">},</span>
 <span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="kc">nil</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="money-types">Money Types<a class="headerlink" href="#money-types" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Money</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Amount</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;amount&quot;`</span><span class="w">   </span><span class="c1">// cents</span>
-<span class="w">    </span><span class="nx">Currency</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;currency&quot;`</span>
+<span class="w">    </span><span class="nx">Amount</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"amount"`</span><span class="w">   </span><span class="c1">// cents</span>
+<span class="w">    </span><span class="nx">Currency</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"currency"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Money</span><span class="p">)</span><span class="w"> </span><span class="nx">TransformSchema</span><span class="p">(</span><span class="nx">schema</span><span class="w"> </span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Add description</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Description</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Money amount in smallest currency unit (e.g., cents for USD)&quot;</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Money amount in smallest currency unit (e.g., cents for USD)"</span>
 
 <span class="w">    </span><span class="c1">// Add example</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Example</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;amount&quot;</span><span class="p">:</span><span class="w">   </span><span class="mi">999</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;USD&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">        </span><span class="s">"amount"</span><span class="p">:</span><span class="w">   </span><span class="mi">999</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s">"USD"</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Mark currency as required</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Required</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;amount&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;currency&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"amount"</span><span class="p">,</span><span class="w"> </span><span class="s">"currency"</span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Add constraints</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">amountSchema</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Properties</span><span class="p">[</span><span class="s">&quot;amount&quot;</span><span class="p">];</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">amountSchema</span><span class="p">.</span><span class="nx">Minimum</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Bound</span><span class="p">{</span><span class="nx">Value</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">}</span>
-<span class="w">        </span><span class="nx">amountSchema</span><span class="p">.</span><span class="nx">Description</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Amount in smallest currency unit (cents)&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">amountSchema</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Properties</span><span class="p">[</span><span class="s">"amount"</span><span class="p">];</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">amountSchema</span><span class="p">.</span><span class="nx">Minimum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Bound</span><span class="p">{</span><span class="nx">Value</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">}</span>
+<span class="w">        </span><span class="nx">amountSchema</span><span class="p">.</span><span class="nx">Description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Amount in smallest currency unit (cents)"</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">currencySchema</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Properties</span><span class="p">[</span><span class="s">&quot;currency&quot;</span><span class="p">];</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">currencySchema</span><span class="p">.</span><span class="nx">Pattern</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;^[A-Z]{3}$&quot;</span>
-<span class="w">        </span><span class="nx">currencySchema</span><span class="p">.</span><span class="nx">Description</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;ISO 4217 currency code&quot;</span>
-<span class="w">        </span><span class="nx">currencySchema</span><span class="p">.</span><span class="nx">Examples</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span><span class="kt">any</span><span class="p">{</span><span class="s">&quot;USD&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EUR&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;GBP&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">currencySchema</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Properties</span><span class="p">[</span><span class="s">"currency"</span><span class="p">];</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">currencySchema</span><span class="p">.</span><span class="nx">Pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"^[A-Z]{3}$"</span>
+<span class="w">        </span><span class="nx">currencySchema</span><span class="p">.</span><span class="nx">Description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"ISO 4217 currency code"</span>
+<span class="w">        </span><span class="nx">currencySchema</span><span class="p">.</span><span class="nx">Examples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span><span class="kt">any</span><span class="p">{</span><span class="s">"USD"</span><span class="p">,</span><span class="w"> </span><span class="s">"EUR"</span><span class="p">,</span><span class="w"> </span><span class="s">"GBP"</span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">schema</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
@@ -1432,18 +1432,18 @@
 </code></pre></div>
 <h3 id="polymorphic-types">Polymorphic Types<a class="headerlink" href="#polymorphic-types" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Event</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Type</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;type&quot;`</span>
-<span class="w">    </span><span class="nx">Data</span><span class="w"> </span><span class="kt">any</span><span class="w">    </span><span class="s">`json:&quot;data&quot;`</span>
+<span class="w">    </span><span class="nx">Type</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"type"`</span>
+<span class="w">    </span><span class="nx">Data</span><span class="w"> </span><span class="kt">any</span><span class="w">    </span><span class="s">`json:"data"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Event</span><span class="p">)</span><span class="w"> </span><span class="nx">TransformSchema</span><span class="p">(</span><span class="nx">schema</span><span class="w"> </span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Add discriminator for polymorphism</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Discriminator</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Discriminator</span><span class="p">{</span>
-<span class="w">        </span><span class="nx">PropertyName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Mapping</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;user_created&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;#/components/schemas/UserCreatedEvent&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;user_updated&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;#/components/schemas/UserUpdatedEvent&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;user_deleted&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;#/components/schemas/UserDeletedEvent&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Discriminator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Discriminator</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">PropertyName</span><span class="p">:</span><span class="w"> </span><span class="s">"type"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Mapping</span><span class="p">:</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"user_created"</span><span class="p">:</span><span class="w">  </span><span class="s">"#/components/schemas/UserCreatedEvent"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"user_updated"</span><span class="p">:</span><span class="w">  </span><span class="s">"#/components/schemas/UserUpdatedEvent"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"user_deleted"</span><span class="p">:</span><span class="w">  </span><span class="s">"#/components/schemas/UserDeletedEvent"</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -1455,13 +1455,13 @@
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">DatabaseID</span><span class="p">)</span><span class="w"> </span><span class="nx">ProvideSchema</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;integer&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Format</span><span class="p">:</span><span class="w">      </span><span class="s">&quot;int64&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">"integer"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Format</span><span class="p">:</span><span class="w">      </span><span class="s">"int64"</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">Minimum</span><span class="p">:</span><span class="w">     </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Bound</span><span class="p">{</span><span class="nx">Value</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
-<span class="w">        </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Database primary key&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">"Database primary key"</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">Examples</span><span class="p">:</span><span class="w">    </span><span class="p">[]</span><span class="kt">any</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">},</span>
-<span class="w">        </span><span class="nx">Extensions</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;x-database-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;BIGINT&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Extensions</span><span class="p">:</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"x-database-type"</span><span class="p">:</span><span class="w"> </span><span class="s">"BIGINT"</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="kc">nil</span>
 <span class="p">}</span>
@@ -1470,12 +1470,12 @@
 <p>Return errors from hooks when transformation fails:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">User</span><span class="p">)</span><span class="w"> </span><span class="nx">TransformSchema</span><span class="p">(</span><span class="nx">schema</span><span class="w"> </span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">schema</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;schema cannot be nil&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">"schema cannot be nil"</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Validate schema before transforming</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Type</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;object&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;User schema must be an object, got %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Type</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Type</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">"object"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">"User schema must be an object, got %s"</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Type</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Transform...</span>
@@ -1486,14 +1486,14 @@
 <h2 id="combining-hooks-with-tags">Combining Hooks with Tags<a class="headerlink" href="#combining-hooks-with-tags" title="Anchor link to this section">&para;</a></h2>
 <p>Hooks work alongside struct tags:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Product</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">    </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:&quot;id&quot; openapi:&quot;readOnly&quot;`</span>
-<span class="w">    </span><span class="nx">Price</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;price&quot; validate:&quot;min=0&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">    </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:"id" openapi:"readOnly"`</span>
+<span class="w">    </span><span class="nx">Price</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:"price" validate:"min=0"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Product</span><span class="p">)</span><span class="w"> </span><span class="nx">TransformSchema</span><span class="p">(</span><span class="nx">schema</span><span class="w"> </span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Tags are already applied, now add more</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Extensions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;x-resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;product&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Extensions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">        </span><span class="s">"x-resource"</span><span class="p">:</span><span class="w"> </span><span class="s">"product"</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">schema</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
@@ -1507,16 +1507,16 @@
 <h3 id="conditional-properties">Conditional Properties<a class="headerlink" href="#conditional-properties" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Order</span><span class="p">)</span><span class="w"> </span><span class="nx">TransformSchema</span><span class="p">(</span><span class="nx">schema</span><span class="w"> </span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Add conditional validation in OpenAPI 3.1</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">If</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Properties</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;payment_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">Const</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;credit_card&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">If</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Properties</span><span class="p">:</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">Const</span><span class="p">:</span><span class="w"> </span><span class="s">"credit_card"</span><span class="p">,</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Then</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Required</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;card_number&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cvv&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Then</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Required</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"card_number"</span><span class="p">,</span><span class="w"> </span><span class="s">"cvv"</span><span class="p">},</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">schema</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
@@ -1525,12 +1525,12 @@
 <h3 id="computed-fields">Computed Fields<a class="headerlink" href="#computed-fields" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">User</span><span class="p">)</span><span class="w"> </span><span class="nx">TransformSchema</span><span class="p">(</span><span class="nx">schema</span><span class="w"> </span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Add virtual/computed fields</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Properties</span><span class="p">[</span><span class="s">&quot;full_name&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Computed from first_name and last_name&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Properties</span><span class="p">[</span><span class="s">"full_name"</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">"string"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">"Computed from first_name and last_name"</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">ReadOnly</span><span class="p">:</span><span class="w">    </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Extensions</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;x-computed&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Extensions</span><span class="p">:</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"x-computed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -1540,15 +1540,15 @@
 <h3 id="schema-versioning">Schema Versioning<a class="headerlink" href="#schema-versioning" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">User</span><span class="p">)</span><span class="w"> </span><span class="nx">TransformSchema</span><span class="p">(</span><span class="nx">schema</span><span class="w"> </span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Add version information</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Extensions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;x-schema-version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2.0&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;x-deprecated-fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;username&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Extensions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">        </span><span class="s">"x-schema-version"</span><span class="p">:</span><span class="w"> </span><span class="s">"2.0"</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"x-deprecated-fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"username"</span><span class="p">},</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Mark deprecated fields</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">usernameSchema</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Properties</span><span class="p">[</span><span class="s">&quot;username&quot;</span><span class="p">];</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">usernameSchema</span><span class="p">.</span><span class="nx">Deprecated</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
-<span class="w">        </span><span class="nx">usernameSchema</span><span class="p">.</span><span class="nx">Description</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot; (deprecated: use email instead)&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">usernameSchema</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">Properties</span><span class="p">[</span><span class="s">"username"</span><span class="p">];</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">usernameSchema</span><span class="p">.</span><span class="nx">Deprecated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="nx">usernameSchema</span><span class="p">.</span><span class="nx">Description</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">" (deprecated: use email instead)"</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">schema</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
@@ -1558,12 +1558,12 @@
 <div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">TestUserSchemaTransform</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">user</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">User</span><span class="p">{}</span>
 
-<span class="w">    </span><span class="c1">// Generate base schema (you&#39;ll need access to internal build package)</span>
+<span class="w">    </span><span class="c1">// Generate base schema (you'll need access to internal build package)</span>
 <span class="w">    </span><span class="nx">schema</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;object&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">Properties</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w">   </span><span class="p">{</span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;integer&quot;</span><span class="p">},</span>
-<span class="w">            </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="s">"object"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Properties</span><span class="p">:</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="nx">hook</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"id"</span><span class="p">:</span><span class="w">   </span><span class="p">{</span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="s">"integer"</span><span class="p">},</span>
+<span class="w">            </span><span class="s">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="s">"string"</span><span class="p">},</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -1572,8 +1572,8 @@
 <span class="w">    </span><span class="nx">require</span><span class="p">.</span><span class="nx">NoError</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
 
 <span class="w">    </span><span class="c1">// Verify extensions</span>
-<span class="w">    </span><span class="nx">assert</span><span class="p">.</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">Extensions</span><span class="p">[</span><span class="s">&quot;x-resource-type&quot;</span><span class="p">])</span>
-<span class="w">    </span><span class="nx">assert</span><span class="p">.</span><span class="nx">True</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">Extensions</span><span class="p">[</span><span class="s">&quot;x-searchable&quot;</span><span class="p">].(</span><span class="kt">bool</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">assert</span><span class="p">.</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="s">"user"</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">Extensions</span><span class="p">[</span><span class="s">"x-resource-type"</span><span class="p">])</span>
+<span class="w">    </span><span class="nx">assert</span><span class="p">.</span><span class="nx">True</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">Extensions</span><span class="p">[</span><span class="s">"x-searchable"</span><span class="p">].(</span><span class="kt">bool</span><span class="p">))</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Anchor link to this section">&para;</a></h2>
@@ -1698,10 +1698,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       

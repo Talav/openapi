@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1235,9 +1235,9 @@
 <p>The <code>openapi</code> tag adds OpenAPI-specific properties that don't affect validation.</p>
 <h3 id="basic-properties">Basic Properties<a class="headerlink" href="#basic-properties" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Product</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;id&quot; openapi:&quot;readOnly&quot;`</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot; openapi:&quot;title=Product Name&quot;`</span>
-<span class="w">    </span><span class="nx">Price</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;price&quot; openapi:&quot;description=Price in USD&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"id" openapi:"readOnly"`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name" openapi:"title=Product Name"`</span>
+<span class="w">    </span><span class="nx">Price</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:"price" openapi:"description=Price in USD"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="field-level-options">Field-Level Options<a class="headerlink" href="#field-level-options" title="Anchor link to this section">&para;</a></h3>
@@ -1301,135 +1301,135 @@
 <p>Useful for fields that appear in only one direction:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Server-generated, appears only in responses</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">        </span><span class="kt">int</span><span class="w">       </span><span class="s">`json:&quot;id&quot; openapi:&quot;readOnly&quot;`</span>
-<span class="w">    </span><span class="nx">CreatedAt</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="w"> </span><span class="s">`json:&quot;created_at&quot; openapi:&quot;readOnly&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">        </span><span class="kt">int</span><span class="w">       </span><span class="s">`json:"id" openapi:"readOnly"`</span>
+<span class="w">    </span><span class="nx">CreatedAt</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="w"> </span><span class="s">`json:"created_at" openapi:"readOnly"`</span>
 
 <span class="w">    </span><span class="c1">// Sent in requests, never returned</span>
-<span class="w">    </span><span class="nx">Password</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;password&quot; openapi:&quot;writeOnly&quot;`</span>
+<span class="w">    </span><span class="nx">Password</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"password" openapi:"writeOnly"`</span>
 
 <span class="w">    </span><span class="c1">// Appears in both</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
-<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;email&quot;`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name"`</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"email"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="deprecated-fields">Deprecated Fields<a class="headerlink" href="#deprecated-fields" title="Anchor link to this section">&para;</a></h3>
 <p>Mark fields as deprecated to signal future removal:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
-<span class="w">    </span><span class="nx">FullName</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;full_name&quot;`</span><span class="w"> </span><span class="c1">// New field</span>
-<span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;username&quot; openapi:&quot;deprecated&quot;`</span><span class="w"> </span><span class="c1">// Old field</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name"`</span>
+<span class="w">    </span><span class="nx">FullName</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"full_name"`</span><span class="w"> </span><span class="c1">// New field</span>
+<span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"username" openapi:"deprecated"`</span><span class="w"> </span><span class="c1">// Old field</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="hidden-fields">Hidden Fields<a class="headerlink" href="#hidden-fields" title="Anchor link to this section">&para;</a></h3>
 <p>Exclude fields from the generated schema:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">       </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;id&quot;`</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
-<span class="w">    </span><span class="nx">Internal</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;internal&quot; openapi:&quot;hidden&quot;`</span><span class="w"> </span><span class="c1">// Not in spec</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">       </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"id"`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name"`</span>
+<span class="w">    </span><span class="nx">Internal</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"internal" openapi:"hidden"`</span><span class="w"> </span><span class="c1">// Not in spec</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="examples">Examples<a class="headerlink" href="#examples" title="Anchor link to this section">&para;</a></h3>
 <p>Provide example values for documentation:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Product</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;name&quot; openapi:&quot;examples=Widget|Gadget|Tool&quot;`</span>
-<span class="w">    </span><span class="nx">Price</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;price&quot; openapi:&quot;examples=9.99|19.99|29.99&quot;`</span>
-<span class="w">    </span><span class="nx">SKU</span><span class="w">   </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;sku&quot; openapi:&quot;examples=WDG-001&quot;`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:"name" openapi:"examples=Widget|Gadget|Tool"`</span>
+<span class="w">    </span><span class="nx">Price</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:"price" openapi:"examples=9.99|19.99|29.99"`</span>
+<span class="w">    </span><span class="nx">SKU</span><span class="w">   </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:"sku" openapi:"examples=WDG-001"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Multiple examples separated by <code>|</code>.</p>
 <h3 id="format-hints">Format Hints<a class="headerlink" href="#format-hints" title="Anchor link to this section">&para;</a></h3>
 <p>Specify data formats beyond standard JSON Schema formats:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Event</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Date</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;date&quot; openapi:&quot;format=date&quot;`</span><span class="w">          </span><span class="c1">// yyyy-mm-dd</span>
-<span class="w">    </span><span class="nx">Time</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;time&quot; openapi:&quot;format=time&quot;`</span><span class="w">          </span><span class="c1">// hh:mm:ss</span>
-<span class="w">    </span><span class="nx">DateTime</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;datetime&quot; openapi:&quot;format=date-time&quot;`</span><span class="w"> </span><span class="c1">// RFC3339</span>
-<span class="w">    </span><span class="nx">Duration</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;duration&quot; openapi:&quot;format=duration&quot;`</span><span class="w">   </span><span class="c1">// ISO 8601</span>
+<span class="w">    </span><span class="nx">Date</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"date" openapi:"format=date"`</span><span class="w">          </span><span class="c1">// yyyy-mm-dd</span>
+<span class="w">    </span><span class="nx">Time</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"time" openapi:"format=time"`</span><span class="w">          </span><span class="c1">// hh:mm:ss</span>
+<span class="w">    </span><span class="nx">DateTime</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"datetime" openapi:"format=date-time"`</span><span class="w"> </span><span class="c1">// RFC3339</span>
+<span class="w">    </span><span class="nx">Duration</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"duration" openapi:"format=duration"`</span><span class="w">   </span><span class="c1">// ISO 8601</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="custom-extensions">Custom Extensions<a class="headerlink" href="#custom-extensions" title="Anchor link to this section">&para;</a></h3>
 <p>Add vendor-specific extensions (must start with <code>x-</code>):</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="s">`json:&quot;id&quot; openapi:&quot;x-internal-id=users,x-searchable=true&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="s">`json:"id" openapi:"x-internal-id=users,x-searchable=true"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Generates:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;x-internal-id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;users&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;x-searchable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"x-internal-id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"users"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"x-searchable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="the-default-tag">The <code>default</code> Tag<a class="headerlink" href="#the-default-tag" title="Anchor link to this section">&para;</a></h2>
 <p>Specify default values for optional fields:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Config</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Host</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;host&quot; default:&quot;localhost&quot;`</span>
-<span class="w">    </span><span class="nx">Port</span><span class="w">    </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;port&quot; default:&quot;8080&quot;`</span>
-<span class="w">    </span><span class="nx">Debug</span><span class="w">   </span><span class="kt">bool</span><span class="w">   </span><span class="s">`json:&quot;debug&quot; default:&quot;false&quot;`</span>
-<span class="w">    </span><span class="nx">Timeout</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;timeout&quot; default:&quot;30&quot;`</span>
+<span class="w">    </span><span class="nx">Host</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"host" default:"localhost"`</span>
+<span class="w">    </span><span class="nx">Port</span><span class="w">    </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"port" default:"8080"`</span>
+<span class="w">    </span><span class="nx">Debug</span><span class="w">   </span><span class="kt">bool</span><span class="w">   </span><span class="s">`json:"debug" default:"false"`</span>
+<span class="w">    </span><span class="nx">Timeout</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"timeout" default:"30"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Generates:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;host&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;localhost&quot;</span>
+<span class="w">  </span><span class="nt">"host"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localhost"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8080</span>
+<span class="w">  </span><span class="nt">"port"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="mi">8080</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="type-conversion">Type Conversion<a class="headerlink" href="#type-conversion" title="Anchor link to this section">&para;</a></h3>
 <p>Default values are automatically converted to the correct type:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Settings</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Count</span><span class="w">   </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:&quot;count&quot; default:&quot;10&quot;`</span><span class="w">      </span><span class="c1">// String → int</span>
-<span class="w">    </span><span class="nx">Enabled</span><span class="w"> </span><span class="kt">bool</span><span class="w">    </span><span class="s">`json:&quot;enabled&quot; default:&quot;true&quot;`</span><span class="w">  </span><span class="c1">// String → bool</span>
-<span class="w">    </span><span class="nx">Rate</span><span class="w">    </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;rate&quot; default:&quot;0.5&quot;`</span><span class="w">      </span><span class="c1">// String → float64</span>
+<span class="w">    </span><span class="nx">Count</span><span class="w">   </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:"count" default:"10"`</span><span class="w">      </span><span class="c1">// String → int</span>
+<span class="w">    </span><span class="nx">Enabled</span><span class="w"> </span><span class="kt">bool</span><span class="w">    </span><span class="s">`json:"enabled" default:"true"`</span><span class="w">  </span><span class="c1">// String → bool</span>
+<span class="w">    </span><span class="nx">Rate</span><span class="w">    </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:"rate" default:"0.5"`</span><span class="w">      </span><span class="c1">// String → float64</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="the-requires-tag">The <code>requires</code> Tag<a class="headerlink" href="#the-requires-tag" title="Anchor link to this section">&para;</a></h2>
 <p>Specify conditional required fields (OpenAPI 3.1 <code>dependentRequired</code>):</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Payment</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Method</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;method&quot;`</span>
-<span class="w">    </span><span class="nx">CardNumber</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;card_number&quot; requires:&quot;cvv,expiry&quot;`</span>
-<span class="w">    </span><span class="nx">CVV</span><span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;cvv&quot;`</span>
-<span class="w">    </span><span class="nx">Expiry</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;expiry&quot;`</span>
+<span class="w">    </span><span class="nx">Method</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"method"`</span>
+<span class="w">    </span><span class="nx">CardNumber</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"card_number" requires:"cvv,expiry"`</span>
+<span class="w">    </span><span class="nx">CVV</span><span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"cvv"`</span>
+<span class="w">    </span><span class="nx">Expiry</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"expiry"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>When <code>card_number</code> is present, <code>cvv</code> and <code>expiry</code> become required.</p>
 <p>Generates:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;card_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;cvv&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;expiry&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"card_number"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"expiry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;dependentRequired&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;card_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;cvv&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;expiry&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="nt">"dependentRequired"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"card_number"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cvv"</span><span class="p">,</span><span class="w"> </span><span class="s2">"expiry"</span><span class="p">]</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="multiple-dependencies">Multiple Dependencies<a class="headerlink" href="#multiple-dependencies" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Form</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Type</span><span class="w">         </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;type&quot;`</span>
-<span class="w">    </span><span class="nx">PersonName</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;person_name&quot; requires:&quot;person_age&quot;`</span>
-<span class="w">    </span><span class="nx">PersonAge</span><span class="w">    </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;person_age&quot;`</span>
-<span class="w">    </span><span class="nx">CompanyName</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;company_name&quot; requires:&quot;company_tax_id&quot;`</span>
-<span class="w">    </span><span class="nx">CompanyTaxID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;company_tax_id&quot;`</span>
+<span class="w">    </span><span class="nx">Type</span><span class="w">         </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"type"`</span>
+<span class="w">    </span><span class="nx">PersonName</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"person_name" requires:"person_age"`</span>
+<span class="w">    </span><span class="nx">PersonAge</span><span class="w">    </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"person_age"`</span>
+<span class="w">    </span><span class="nx">CompanyName</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"company_name" requires:"company_tax_id"`</span>
+<span class="w">    </span><span class="nx">CompanyTaxID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"company_tax_id"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="struct-level-metadata">Struct-Level Metadata<a class="headerlink" href="#struct-level-metadata" title="Anchor link to this section">&para;</a></h2>
 <p>Use the blank identifier <code>_</code> for struct-level properties:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span><span class="w"> </span><span class="s">`openapi:&quot;additionalProperties=false,nullable=true&quot;`</span>
+<span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span><span class="w"> </span><span class="s">`openapi:"additionalProperties=false,nullable=true"`</span>
 
-<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;id&quot;`</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"id"`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <ul>
@@ -1439,10 +1439,10 @@
 <h2 id="combining-tags">Combining Tags<a class="headerlink" href="#combining-tags" title="Anchor link to this section">&para;</a></h2>
 <p>Use multiple tags together for complete schemas:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">    </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;id&quot; openapi:&quot;readOnly,title=User ID,description=Unique identifier,examples=1|42|100&quot;`</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot; validate:&quot;required,min=3,max=50&quot; openapi:&quot;title=Full Name,description=User&#39;s display name,examples=John Doe|Jane Smith&quot;`</span>
-<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;email&quot; validate:&quot;required,email&quot; openapi:&quot;description=Contact email,examples=user@example.com&quot; default:&quot;&quot;`</span>
-<span class="w">    </span><span class="nx">Age</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;age&quot; validate:&quot;min=18&quot; openapi:&quot;description=Age in years&quot; default:&quot;18&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">    </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"id" openapi:"readOnly,title=User ID,description=Unique identifier,examples=1|42|100"`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name" validate:"required,min=3,max=50" openapi:"title=Full Name,description=User's display name,examples=John Doe|Jane Smith"`</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"email" validate:"required,email" openapi:"description=Contact email,examples=user@example.com" default:""`</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"age" validate:"min=18" openapi:"description=Age in years" default:"18"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Anchor link to this section">&para;</a></h2>
@@ -1569,10 +1569,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       

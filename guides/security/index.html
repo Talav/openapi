@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1376,59 +1376,59 @@
 <h3 id="bearer-authentication-jwt">Bearer Authentication (JWT)<a class="headerlink" href="#bearer-authentication-jwt" title="Anchor link to this section">&para;</a></h3>
 <p>Most common for modern APIs:</p>
 <div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">NewAPI</span><span class="p">(</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoTitle</span><span class="p">(</span><span class="s">&quot;My API&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoVersion</span><span class="p">(</span><span class="s">&quot;1.0.0&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithBearerAuth</span><span class="p">(</span><span class="s">&quot;bearerAuth&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;JWT authentication&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoTitle</span><span class="p">(</span><span class="s">"My API"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoVersion</span><span class="p">(</span><span class="s">"1.0.0"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithBearerAuth</span><span class="p">(</span><span class="s">"bearerAuth"</span><span class="p">,</span><span class="w"> </span><span class="s">"JWT authentication"</span><span class="p">),</span>
 <span class="p">)</span>
 
 <span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">api</span><span class="p">.</span><span class="nx">Generate</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">CreateUserRequest</span><span class="p">{}),</span>
 <span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">&quot;bearerAuth&quot;</span><span class="p">),</span><span class="w"> </span><span class="c1">// Requires auth</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">"bearerAuth"</span><span class="p">),</span><span class="w"> </span><span class="c1">// Requires auth</span>
 <span class="w">    </span><span class="p">),</span>
 
 <span class="w">    </span><span class="c1">// Public endpoint (no auth)</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/public/info&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/public/info"</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">Info</span><span class="p">{}),</span>
 <span class="w">    </span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
 <p>Generates:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;components&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;securitySchemes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;bearerAuth&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;scheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bearer&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;bearerFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JWT&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JWT authentication&quot;</span>
+<span class="w">  </span><span class="nt">"components"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"securitySchemes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"bearerAuth"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"scheme"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"bearerFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JWT"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JWT authentication"</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="basic-authentication">Basic Authentication<a class="headerlink" href="#basic-authentication" title="Anchor link to this section">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">&quot;basicAuth&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;http&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">Scheme</span><span class="p">:</span><span class="w">      </span><span class="s">&quot;basic&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Basic HTTP authentication&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">"basicAuth"</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">"http"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Scheme</span><span class="p">:</span><span class="w">      </span><span class="s">"basic"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">"Basic HTTP authentication"</span><span class="p">,</span>
 <span class="p">})</span>
 </code></pre></div>
 <h3 id="custom-http-schemes">Custom HTTP Schemes<a class="headerlink" href="#custom-http-schemes" title="Anchor link to this section">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">&quot;digestAuth&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;http&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">Scheme</span><span class="p">:</span><span class="w">      </span><span class="s">&quot;digest&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Digest authentication&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">"digestAuth"</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">"http"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Scheme</span><span class="p">:</span><span class="w">      </span><span class="s">"digest"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">"Digest authentication"</span><span class="p">,</span>
 <span class="p">})</span>
 </code></pre></div>
 <h2 id="api-key-authentication">API Key Authentication<a class="headerlink" href="#api-key-authentication" title="Anchor link to this section">&para;</a></h2>
 <h3 id="header-based-api-keys">Header-Based API Keys<a class="headerlink" href="#header-based-api-keys" title="Anchor link to this section">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">&quot;apiKey&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;apiKey&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">In</span><span class="p">:</span><span class="w">          </span><span class="s">&quot;header&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">Name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;X-API-Key&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;API key for external integrations&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">"apiKey"</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">"apiKey"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">In</span><span class="p">:</span><span class="w">          </span><span class="s">"header"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Name</span><span class="p">:</span><span class="w">        </span><span class="s">"X-API-Key"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">"API key for external integrations"</span><span class="p">,</span>
 <span class="p">})</span>
 </code></pre></div>
 <p>Usage:</p>
@@ -1436,185 +1436,185 @@
 X-API-Key: your-api-key-here
 </code></pre></div>
 <h3 id="query-parameter-api-keys">Query Parameter API Keys<a class="headerlink" href="#query-parameter-api-keys" title="Anchor link to this section">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">&quot;apiKeyQuery&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;apiKey&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">In</span><span class="p">:</span><span class="w">          </span><span class="s">&quot;query&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">Name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;api_key&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;API key in query string&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">"apiKeyQuery"</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">"apiKey"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">In</span><span class="p">:</span><span class="w">          </span><span class="s">"query"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Name</span><span class="p">:</span><span class="w">        </span><span class="s">"api_key"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">"API key in query string"</span><span class="p">,</span>
 <span class="p">})</span>
 </code></pre></div>
 <p>Usage:</p>
 <div class="highlight"><pre><span></span><code>GET /users?api_key=your-api-key-here
 </code></pre></div>
 <h3 id="cookie-based-api-keys">Cookie-Based API Keys<a class="headerlink" href="#cookie-based-api-keys" title="Anchor link to this section">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">&quot;cookieAuth&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;apiKey&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">In</span><span class="p">:</span><span class="w">          </span><span class="s">&quot;cookie&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">Name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;session_id&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Session cookie&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">"cookieAuth"</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">"apiKey"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">In</span><span class="p">:</span><span class="w">          </span><span class="s">"cookie"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Name</span><span class="p">:</span><span class="w">        </span><span class="s">"session_id"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">"Session cookie"</span><span class="p">,</span>
 <span class="p">})</span>
 </code></pre></div>
 <h2 id="oauth-20">OAuth 2.0<a class="headerlink" href="#oauth-20" title="Anchor link to this section">&para;</a></h2>
 <h3 id="authorization-code-flow">Authorization Code Flow<a class="headerlink" href="#authorization-code-flow" title="Anchor link to this section">&para;</a></h3>
 <p>For web applications with backend:</p>
-<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">WithOAuth2Auth</span><span class="p">(</span><span class="s">&quot;oauth2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;OAuth 2.0 authentication&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">WithOAuth2Auth</span><span class="p">(</span><span class="s">"oauth2"</span><span class="p">,</span><span class="w"> </span><span class="s">"OAuth 2.0 authentication"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithAuthorizationCodeFlow</span><span class="p">(</span>
-<span class="w">        </span><span class="s">&quot;https://auth.example.com/oauth/authorize&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;https://auth.example.com/oauth/token&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;read:users&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;Read user data&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;write:users&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Modify user data&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;admin&quot;</span><span class="p">:</span><span class="w">       </span><span class="s">&quot;Administrative access&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"https://auth.example.com/oauth/authorize"</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"https://auth.example.com/oauth/token"</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"read:users"</span><span class="p">:</span><span class="w">  </span><span class="s">"Read user data"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"write:users"</span><span class="p">:</span><span class="w"> </span><span class="s">"Modify user data"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"admin"</span><span class="p">:</span><span class="w">       </span><span class="s">"Administrative access"</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
 <h3 id="implicit-flow">Implicit Flow<a class="headerlink" href="#implicit-flow" title="Anchor link to this section">&para;</a></h3>
 <p>For single-page applications (deprecated in OAuth 2.1):</p>
-<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">WithOAuth2Auth</span><span class="p">(</span><span class="s">&quot;oauth2Implicit&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;OAuth 2.0 Implicit&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">WithOAuth2Auth</span><span class="p">(</span><span class="s">"oauth2Implicit"</span><span class="p">,</span><span class="w"> </span><span class="s">"OAuth 2.0 Implicit"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithImplicitFlow</span><span class="p">(</span>
-<span class="w">        </span><span class="s">&quot;https://auth.example.com/oauth/authorize&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;read&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Read access&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"https://auth.example.com/oauth/authorize"</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"read"</span><span class="p">:</span><span class="w"> </span><span class="s">"Read access"</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
 <h3 id="client-credentials-flow">Client Credentials Flow<a class="headerlink" href="#client-credentials-flow" title="Anchor link to this section">&para;</a></h3>
 <p>For server-to-server authentication:</p>
-<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">WithOAuth2Auth</span><span class="p">(</span><span class="s">&quot;oauth2Client&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;OAuth 2.0 Client Credentials&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">WithOAuth2Auth</span><span class="p">(</span><span class="s">"oauth2Client"</span><span class="p">,</span><span class="w"> </span><span class="s">"OAuth 2.0 Client Credentials"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithClientCredentialsFlow</span><span class="p">(</span>
-<span class="w">        </span><span class="s">&quot;https://auth.example.com/oauth/token&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;api:access&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;API access&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"https://auth.example.com/oauth/token"</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"api:access"</span><span class="p">:</span><span class="w"> </span><span class="s">"API access"</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
 <h3 id="password-flow">Password Flow<a class="headerlink" href="#password-flow" title="Anchor link to this section">&para;</a></h3>
 <p>For trusted applications (deprecated in OAuth 2.1):</p>
-<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">WithOAuth2Auth</span><span class="p">(</span><span class="s">&quot;oauth2Password&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;OAuth 2.0 Password&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">WithOAuth2Auth</span><span class="p">(</span><span class="s">"oauth2Password"</span><span class="p">,</span><span class="w"> </span><span class="s">"OAuth 2.0 Password"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithPasswordFlow</span><span class="p">(</span>
-<span class="w">        </span><span class="s">&quot;https://auth.example.com/oauth/token&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;read&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Read access&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;write&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Write access&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"https://auth.example.com/oauth/token"</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"read"</span><span class="p">:</span><span class="w"> </span><span class="s">"Read access"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"write"</span><span class="p">:</span><span class="w"> </span><span class="s">"Write access"</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
 <h3 id="multiple-flows">Multiple Flows<a class="headerlink" href="#multiple-flows" title="Anchor link to this section">&para;</a></h3>
 <p>Combine flows for different client types:</p>
-<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">&quot;oauth2Multi&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;oauth2&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;OAuth 2.0&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">"oauth2Multi"</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">"oauth2"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">"OAuth 2.0"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">Flows</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">openapi</span><span class="p">.</span><span class="nx">OAuthFlows</span><span class="p">{</span>
 <span class="w">        </span><span class="nx">AuthorizationCode</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">openapi</span><span class="p">.</span><span class="nx">OAuthFlow</span><span class="p">{</span>
-<span class="w">            </span><span class="nx">AuthorizationURL</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://auth.example.com/authorize&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">TokenURL</span><span class="p">:</span><span class="w">         </span><span class="s">&quot;https://auth.example.com/token&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">Scopes</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
-<span class="w">                </span><span class="s">&quot;read&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;Read access&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="s">&quot;write&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Write access&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">AuthorizationURL</span><span class="p">:</span><span class="w"> </span><span class="s">"https://auth.example.com/authorize"</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">TokenURL</span><span class="p">:</span><span class="w">         </span><span class="s">"https://auth.example.com/token"</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">Scopes</span><span class="p">:</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">                </span><span class="s">"read"</span><span class="p">:</span><span class="w">  </span><span class="s">"Read access"</span><span class="p">,</span>
+<span class="w">                </span><span class="s">"write"</span><span class="p">:</span><span class="w"> </span><span class="s">"Write access"</span><span class="p">,</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="nx">ClientCredentials</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">openapi</span><span class="p">.</span><span class="nx">OAuthFlow</span><span class="p">{</span>
-<span class="w">            </span><span class="nx">TokenURL</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://auth.example.com/token&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">Scopes</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
-<span class="w">                </span><span class="s">&quot;api&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;API access&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">TokenURL</span><span class="p">:</span><span class="w"> </span><span class="s">"https://auth.example.com/token"</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">Scopes</span><span class="p">:</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">                </span><span class="s">"api"</span><span class="p">:</span><span class="w"> </span><span class="s">"API access"</span><span class="p">,</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="p">})</span>
 </code></pre></div>
 <h2 id="openid-connect">OpenID Connect<a class="headerlink" href="#openid-connect" title="Anchor link to this section">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">WithOpenIDConnectAuth</span><span class="p">(</span><span class="s">&quot;oidc&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;OpenID Connect&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s">&quot;https://auth.example.com/.well-known/openid-configuration&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">WithOpenIDConnectAuth</span><span class="p">(</span><span class="s">"oidc"</span><span class="p">,</span><span class="w"> </span><span class="s">"OpenID Connect"</span><span class="p">,</span>
+<span class="w">    </span><span class="s">"https://auth.example.com/.well-known/openid-configuration"</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 <h2 id="applying-security-to-operations">Applying Security to Operations<a class="headerlink" href="#applying-security-to-operations" title="Anchor link to this section">&para;</a></h2>
 <h3 id="single-security-scheme">Single Security Scheme<a class="headerlink" href="#single-security-scheme" title="Anchor link to this section">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">CreateUserRequest</span><span class="p">{}),</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">&quot;bearerAuth&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">"bearerAuth"</span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
 <h3 id="multiple-security-schemes-and">Multiple Security Schemes (AND)<a class="headerlink" href="#multiple-security-schemes-and" title="Anchor link to this section">&para;</a></h3>
 <p>Requires ALL schemes:</p>
-<div class="highlight"><pre><span></span><code><span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/admin/users&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">"/admin/users"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">CreateUserRequest</span><span class="p">{}),</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">&quot;bearerAuth&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;apiKey&quot;</span><span class="p">),</span><span class="w"> </span><span class="c1">// Both required</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">"bearerAuth"</span><span class="p">,</span><span class="w"> </span><span class="s">"apiKey"</span><span class="p">),</span><span class="w"> </span><span class="c1">// Both required</span>
 <span class="p">)</span>
 </code></pre></div>
 <h3 id="alternative-security-schemes-or">Alternative Security Schemes (OR)<a class="headerlink" href="#alternative-security-schemes-or" title="Anchor link to this section">&para;</a></h3>
 <p>Accepts ANY scheme:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Method 1: Multiple WithSecurity calls</span>
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="p">[]</span><span class="nx">User</span><span class="p">{}),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">&quot;bearerAuth&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">&quot;apiKey&quot;</span><span class="p">),</span><span class="w"> </span><span class="c1">// Alternative</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">"bearerAuth"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">"apiKey"</span><span class="p">),</span><span class="w"> </span><span class="c1">// Alternative</span>
 <span class="p">)</span>
 
 <span class="c1">// Method 2: Pass empty strings to separate alternatives</span>
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="p">[]</span><span class="nx">User</span><span class="p">{}),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">&quot;bearerAuth&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">),</span><span class="w"> </span><span class="c1">// OR separator</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">&quot;apiKey&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">"bearerAuth"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">""</span><span class="p">),</span><span class="w"> </span><span class="c1">// OR separator</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">"apiKey"</span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
 <h2 id="oauth-scopes">OAuth Scopes<a class="headerlink" href="#oauth-scopes" title="Anchor link to this section">&para;</a></h2>
 <p>Specify required OAuth scopes per operation:</p>
-<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">WithOAuth2Auth</span><span class="p">(</span><span class="s">&quot;oauth2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;OAuth 2.0&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">WithOAuth2Auth</span><span class="p">(</span><span class="s">"oauth2"</span><span class="p">,</span><span class="w"> </span><span class="s">"OAuth 2.0"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithAuthorizationCodeFlow</span><span class="p">(</span>
-<span class="w">        </span><span class="s">&quot;https://auth.example.com/authorize&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;https://auth.example.com/token&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;users:read&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;Read users&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;users:write&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Write users&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;admin&quot;</span><span class="p">:</span><span class="w">       </span><span class="s">&quot;Admin access&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"https://auth.example.com/authorize"</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"https://auth.example.com/token"</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"users:read"</span><span class="p">:</span><span class="w">  </span><span class="s">"Read users"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"users:write"</span><span class="p">:</span><span class="w"> </span><span class="s">"Write users"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"admin"</span><span class="p">:</span><span class="w">       </span><span class="s">"Admin access"</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">),</span>
 <span class="p">)</span>
 
 <span class="c1">// Read operation - requires read scope</span>
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="p">[]</span><span class="nx">User</span><span class="p">{}),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithOAuthScopes</span><span class="p">(</span><span class="s">&quot;oauth2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;users:read&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithOAuthScopes</span><span class="p">(</span><span class="s">"oauth2"</span><span class="p">,</span><span class="w"> </span><span class="s">"users:read"</span><span class="p">),</span>
 <span class="p">)</span>
 
 <span class="c1">// Write operation - requires write scope</span>
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">CreateUserRequest</span><span class="p">{}),</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithOAuthScopes</span><span class="p">(</span><span class="s">&quot;oauth2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;users:write&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithOAuthScopes</span><span class="p">(</span><span class="s">"oauth2"</span><span class="p">,</span><span class="w"> </span><span class="s">"users:write"</span><span class="p">),</span>
 <span class="p">)</span>
 
 <span class="c1">// Admin operation - requires both scopes</span>
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">DELETE</span><span class="p">(</span><span class="s">&quot;/users/:id&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">DELETE</span><span class="p">(</span><span class="s">"/users/:id"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">DeleteUserRequest</span><span class="p">{}),</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">204</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithOAuthScopes</span><span class="p">(</span><span class="s">&quot;oauth2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;users:write&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;admin&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithOAuthScopes</span><span class="p">(</span><span class="s">"oauth2"</span><span class="p">,</span><span class="w"> </span><span class="s">"users:write"</span><span class="p">,</span><span class="w"> </span><span class="s">"admin"</span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
 <h2 id="global-security">Global Security<a class="headerlink" href="#global-security" title="Anchor link to this section">&para;</a></h2>
 <p>Apply security to all operations by default:</p>
 <div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">NewAPI</span><span class="p">(</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoTitle</span><span class="p">(</span><span class="s">&quot;My API&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoVersion</span><span class="p">(</span><span class="s">&quot;1.0.0&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithBearerAuth</span><span class="p">(</span><span class="s">&quot;bearerAuth&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;JWT auth&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithGlobalSecurity</span><span class="p">(</span><span class="s">&quot;bearerAuth&quot;</span><span class="p">),</span><span class="w"> </span><span class="c1">// All operations require auth</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoTitle</span><span class="p">(</span><span class="s">"My API"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoVersion</span><span class="p">(</span><span class="s">"1.0.0"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithBearerAuth</span><span class="p">(</span><span class="s">"bearerAuth"</span><span class="p">,</span><span class="w"> </span><span class="s">"JWT auth"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithGlobalSecurity</span><span class="p">(</span><span class="s">"bearerAuth"</span><span class="p">),</span><span class="w"> </span><span class="c1">// All operations require auth</span>
 <span class="p">)</span>
 
 <span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">api</span><span class="p">.</span><span class="nx">Generate</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span>
 <span class="w">    </span><span class="c1">// Inherits global security</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="p">[]</span><span class="nx">User</span><span class="p">{}),</span>
 <span class="w">    </span><span class="p">),</span>
 
 <span class="w">    </span><span class="c1">// Override to make public</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/public/status&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/public/status"</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">Status</span><span class="p">{}),</span>
 <span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithoutSecurity</span><span class="p">(),</span><span class="w"> </span><span class="c1">// No auth required</span>
 <span class="w">    </span><span class="p">),</span>
@@ -1622,67 +1622,67 @@ X-API-Key: your-api-key-here
 </code></pre></div>
 <h2 id="common-patterns">Common Patterns<a class="headerlink" href="#common-patterns" title="Anchor link to this section">&para;</a></h2>
 <h3 id="multi-tenant-api-keys">Multi-Tenant API Keys<a class="headerlink" href="#multi-tenant-api-keys" title="Anchor link to this section">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">&quot;tenantAuth&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;apiKey&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">In</span><span class="p">:</span><span class="w">          </span><span class="s">&quot;header&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">Name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;X-Tenant-ID&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Tenant identifier&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">"tenantAuth"</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">"apiKey"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">In</span><span class="p">:</span><span class="w">          </span><span class="s">"header"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Name</span><span class="p">:</span><span class="w">        </span><span class="s">"X-Tenant-ID"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">"Tenant identifier"</span><span class="p">,</span>
 <span class="p">})</span>
 
-<span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">&quot;apiKey&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;apiKey&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">In</span><span class="p">:</span><span class="w">          </span><span class="s">&quot;header&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">Name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;X-API-Key&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;API key&quot;</span><span class="p">,</span>
+<span class="nx">api</span><span class="p">.</span><span class="nx">AddSecurityScheme</span><span class="p">(</span><span class="s">"apiKey"</span><span class="p">,</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">SecurityScheme</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">        </span><span class="s">"apiKey"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">In</span><span class="p">:</span><span class="w">          </span><span class="s">"header"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Name</span><span class="p">:</span><span class="w">        </span><span class="s">"X-API-Key"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">"API key"</span><span class="p">,</span>
 <span class="p">})</span>
 
 <span class="c1">// Requires both tenant ID and API key</span>
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/data&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/data"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">Data</span><span class="p">{}),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">&quot;tenantAuth&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;apiKey&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">"tenantAuth"</span><span class="p">,</span><span class="w"> </span><span class="s">"apiKey"</span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
 <h3 id="mixed-public-and-private-endpoints">Mixed Public and Private Endpoints<a class="headerlink" href="#mixed-public-and-private-endpoints" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">NewAPI</span><span class="p">(</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithBearerAuth</span><span class="p">(</span><span class="s">&quot;bearerAuth&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;JWT auth&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithBearerAuth</span><span class="p">(</span><span class="s">"bearerAuth"</span><span class="p">,</span><span class="w"> </span><span class="s">"JWT auth"</span><span class="p">),</span>
 <span class="p">)</span>
 
 <span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">api</span><span class="p">.</span><span class="nx">Generate</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span>
 <span class="w">    </span><span class="c1">// Public endpoints</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/public/products&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/public/products"</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="p">[]</span><span class="nx">Product</span><span class="p">{}),</span>
 <span class="w">    </span><span class="p">),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/public/pricing&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/public/pricing"</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">Pricing</span><span class="p">{}),</span>
 <span class="w">    </span><span class="p">),</span>
 
 <span class="w">    </span><span class="c1">// Protected endpoints</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">CreateUserRequest</span><span class="p">{}),</span>
 <span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">&quot;bearerAuth&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">"bearerAuth"</span><span class="p">),</span>
 <span class="w">    </span><span class="p">),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users/me&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/users/me"</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">&quot;bearerAuth&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">"bearerAuth"</span><span class="p">),</span>
 <span class="w">    </span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
 <h3 id="admin-endpoints-with-extra-security">Admin Endpoints with Extra Security<a class="headerlink" href="#admin-endpoints-with-extra-security" title="Anchor link to this section">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">WithBearerAuth</span><span class="p">(</span><span class="s">&quot;userAuth&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;User JWT&quot;</span><span class="p">)</span>
-<span class="nx">api</span><span class="p">.</span><span class="nx">WithAPIKeyAuth</span><span class="p">(</span><span class="s">&quot;adminKey&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;X-Admin-Key&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;header&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Admin API key&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">WithBearerAuth</span><span class="p">(</span><span class="s">"userAuth"</span><span class="p">,</span><span class="w"> </span><span class="s">"User JWT"</span><span class="p">)</span>
+<span class="nx">api</span><span class="p">.</span><span class="nx">WithAPIKeyAuth</span><span class="p">(</span><span class="s">"adminKey"</span><span class="p">,</span><span class="w"> </span><span class="s">"X-Admin-Key"</span><span class="p">,</span><span class="w"> </span><span class="s">"header"</span><span class="p">,</span><span class="w"> </span><span class="s">"Admin API key"</span><span class="p">)</span>
 
 <span class="c1">// Regular user endpoints</span>
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/profile&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/profile"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">Profile</span><span class="p">{}),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">&quot;userAuth&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">"userAuth"</span><span class="p">),</span>
 <span class="p">)</span>
 
 <span class="c1">// Admin endpoints require BOTH auth methods</span>
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/admin/users&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">"/admin/users"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">CreateUserRequest</span><span class="p">{}),</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">&quot;userAuth&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;adminKey&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithSecurity</span><span class="p">(</span><span class="s">"userAuth"</span><span class="p">,</span><span class="w"> </span><span class="s">"adminKey"</span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Anchor link to this section">&para;</a></h2>
@@ -1808,10 +1808,10 @@ X-API-Key: your-api-key-here
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       

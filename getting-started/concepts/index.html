@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1308,82 +1308,82 @@
 <h3 id="1-json-property-names">1. <code>json</code> - Property Names<a class="headerlink" href="#1-json-property-names" title="Anchor link to this section">&para;</a></h3>
 <p>Standard Go tag for JSON field names, used to name properties in schemas:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;id&quot;`</span><span class="w">           </span><span class="c1">// Property: &quot;id&quot;</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span><span class="w">         </span><span class="c1">// Property: &quot;name&quot;</span>
-<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;age,omitempty&quot;`</span><span class="w"> </span><span class="c1">// Property: &quot;age&quot; (omitempty ignored)</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"id"`</span><span class="w">           </span><span class="c1">// Property: "id"</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name"`</span><span class="w">         </span><span class="c1">// Property: "name"</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"age,omitempty"`</span><span class="w"> </span><span class="c1">// Property: "age" (omitempty ignored)</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="2-schema-parameter-metadata">2. <code>schema</code> - Parameter Metadata<a class="headerlink" href="#2-schema-parameter-metadata" title="Anchor link to this section">&para;</a></h3>
 <p>Defines where parameters come from and how they're serialized:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Request</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">      </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;id,location=path&quot;`</span><span class="w">        </span><span class="c1">// Path parameter</span>
-<span class="w">    </span><span class="nx">Search</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;q,location=query&quot;`</span><span class="w">        </span><span class="c1">// Query parameter</span>
-<span class="w">    </span><span class="nx">APIKey</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;X-API-Key,location=header&quot;`</span><span class="w"> </span><span class="c1">// Header</span>
-<span class="w">    </span><span class="nx">Session</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;session,location=cookie&quot;`</span><span class="w">   </span><span class="c1">// Cookie</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">      </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"id,location=path"`</span><span class="w">        </span><span class="c1">// Path parameter</span>
+<span class="w">    </span><span class="nx">Search</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"q,location=query"`</span><span class="w">        </span><span class="c1">// Query parameter</span>
+<span class="w">    </span><span class="nx">APIKey</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"X-API-Key,location=header"`</span><span class="w"> </span><span class="c1">// Header</span>
+<span class="w">    </span><span class="nx">Session</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"session,location=cookie"`</span><span class="w">   </span><span class="c1">// Cookie</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Learn more: <a href="https://talav.github.io/schema/">Tag Reference (talav/schema)</a></p>
 <h3 id="3-body-requestresponse-bodies">3. <code>body</code> - Request/Response Bodies<a class="headerlink" href="#3-body-requestresponse-bodies" title="Anchor link to this section">&para;</a></h3>
 <p>Marks which field contains the body:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">CreateUserRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span><span class="w"> </span><span class="c1">// JSON/XML/form body</span>
+<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="s">`body:"structured"`</span><span class="w"> </span><span class="c1">// JSON/XML/form body</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">FileUploadRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="s">`body:&quot;file&quot;`</span><span class="w"> </span><span class="c1">// Binary file upload</span>
+<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="s">`body:"file"`</span><span class="w"> </span><span class="c1">// Binary file upload</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="4-validate-validation-rules">4. <code>validate</code> - Validation Rules<a class="headerlink" href="#4-validate-validation-rules" title="Anchor link to this section">&para;</a></h3>
 <p>Validation tags transform into OpenAPI schema constraints:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot; validate:&quot;required,min=3,max=50&quot;`</span>
-<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;email&quot; validate:&quot;required,email&quot;`</span>
-<span class="w">    </span><span class="nx">Age</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;age&quot; validate:&quot;min=18,max=120&quot;`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name" validate:"required,min=3,max=50"`</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"email" validate:"required,email"`</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"age" validate:"min=18,max=120"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Becomes:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;minLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;maxLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span>
+<span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;email&quot;</span>
+<span class="w">  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span>
+<span class="w">  </span><span class="nt">"age"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"minimum"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"maximum"</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"email"</span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Learn more: <a href="../../guides/validation/">Validation</a></p>
 <h3 id="5-openapi-openapi-metadata">5. <code>openapi</code> - OpenAPI Metadata<a class="headerlink" href="#5-openapi-openapi-metadata" title="Anchor link to this section">&para;</a></h3>
 <p>Additional OpenAPI-specific properties:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Product</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">    </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;id&quot; openapi:&quot;readOnly&quot;`</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;name&quot; openapi:&quot;title=Product Name,description=Display name&quot;`</span>
-<span class="w">    </span><span class="nx">Price</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;price&quot; openapi:&quot;examples=9.99|19.99|29.99&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">    </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:"id" openapi:"readOnly"`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:"name" openapi:"title=Product Name,description=Display name"`</span>
+<span class="w">    </span><span class="nx">Price</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:"price" openapi:"examples=9.99|19.99|29.99"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Learn more: <a href="../../guides/metadata/">Metadata</a></p>
 <h3 id="6-default-default-values">6. <code>default</code> - Default Values<a class="headerlink" href="#6-default-default-values" title="Anchor link to this section">&para;</a></h3>
 <p>Specify defaults for optional fields:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Config</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Host</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;host&quot; default:&quot;localhost&quot;`</span>
-<span class="w">    </span><span class="nx">Port</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;port&quot; default:&quot;8080&quot;`</span>
+<span class="w">    </span><span class="nx">Host</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"host" default:"localhost"`</span>
+<span class="w">    </span><span class="nx">Port</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"port" default:"8080"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="7-requires-conditional-requirements">7. <code>requires</code> - Conditional Requirements<a class="headerlink" href="#7-requires-conditional-requirements" title="Anchor link to this section">&para;</a></h3>
 <p>Fields that become required when another field is present:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">PaymentRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Method</span><span class="w">      </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;method&quot;`</span>
-<span class="w">    </span><span class="nx">CardNumber</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;card_number&quot; requires:&quot;cvv,expiry&quot;`</span>
-<span class="w">    </span><span class="nx">CVV</span><span class="w">         </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;cvv&quot;`</span>
-<span class="w">    </span><span class="nx">Expiry</span><span class="w">      </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;expiry&quot;`</span>
+<span class="w">    </span><span class="nx">Method</span><span class="w">      </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"method"`</span>
+<span class="w">    </span><span class="nx">CardNumber</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"card_number" requires:"cvv,expiry"`</span>
+<span class="w">    </span><span class="nx">CVV</span><span class="w">         </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"cvv"`</span>
+<span class="w">    </span><span class="nx">Expiry</span><span class="w">      </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"expiry"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>When <code>card_number</code> is provided, both <code>cvv</code> and <code>expiry</code> become required.</p>
@@ -1400,28 +1400,28 @@
 <h3 id="request-structs">Request Structs<a class="headerlink" href="#request-structs" title="Anchor link to this section">&para;</a></h3>
 <p>Request structs can have parameters and a body:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">CreatePostRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">OrgID</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;org_id,location=path&quot;`</span><span class="w"> </span><span class="c1">// Parameter</span>
-<span class="w">    </span><span class="nx">APIKey</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;X-API-Key,location=header&quot;`</span><span class="w"> </span><span class="c1">// Parameter</span>
+<span class="w">    </span><span class="nx">OrgID</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"org_id,location=path"`</span><span class="w"> </span><span class="c1">// Parameter</span>
+<span class="w">    </span><span class="nx">APIKey</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"X-API-Key,location=header"`</span><span class="w"> </span><span class="c1">// Parameter</span>
 <span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Title</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;title&quot; validate:&quot;required&quot;`</span>
-<span class="w">        </span><span class="nx">Content</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;content&quot; validate:&quot;required&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span><span class="w"> </span><span class="c1">// Request body</span>
+<span class="w">        </span><span class="nx">Title</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"title" validate:"required"`</span>
+<span class="w">        </span><span class="nx">Content</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"content" validate:"required"`</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:"structured"`</span><span class="w"> </span><span class="c1">// Request body</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="response-structs">Response Structs<a class="headerlink" href="#response-structs" title="Anchor link to this section">&para;</a></h3>
 <p>Response structs can use either pattern:</p>
 <p><strong>Simple pattern</strong> - the struct is the response body:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;id&quot;`</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"id"`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name"`</span>
 <span class="p">}</span>
 
 <span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{})</span><span class="w"> </span><span class="c1">// User becomes the response schema</span>
 </code></pre></div>
 <p><strong>Advanced pattern</strong> - use body tag for headers:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">UserResponse</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ETag</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;ETag,location=header&quot;`</span><span class="w"> </span><span class="c1">// Response header</span>
-<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="nx">User</span><span class="w">   </span><span class="s">`body:&quot;structured&quot;`</span><span class="w">              </span><span class="c1">// Response body</span>
+<span class="w">    </span><span class="nx">ETag</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"ETag,location=header"`</span><span class="w"> </span><span class="c1">// Response header</span>
+<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="nx">User</span><span class="w">   </span><span class="s">`body:"structured"`</span><span class="w">              </span><span class="c1">// Response body</span>
 <span class="p">}</span>
 
 <span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">UserResponse</span><span class="p">{})</span><span class="w"> </span><span class="c1">// Includes headers</span>
@@ -1431,16 +1431,16 @@
 <h3 id="simple-pattern-most-common">Simple Pattern (Most Common)<a class="headerlink" href="#simple-pattern-most-common" title="Anchor link to this section">&para;</a></h3>
 <p>Pass your response struct directly - the entire struct becomes the response body:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;id&quot;`</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"id"`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name"`</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">ErrorResponse</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Message</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;message&quot;`</span>
-<span class="w">    </span><span class="nx">Code</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;code&quot;`</span>
+<span class="w">    </span><span class="nx">Message</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"message"`</span>
+<span class="w">    </span><span class="nx">Code</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"code"`</span>
 <span class="p">}</span>
 
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users/:id&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/users/:id"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span><span class="w">           </span><span class="c1">// ✅ Simple</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="nx">ErrorResponse</span><span class="p">{}),</span><span class="w">  </span><span class="c1">// ✅ Simple</span>
 <span class="p">)</span>
@@ -1448,12 +1448,12 @@
 <h3 id="advanced-pattern-with-response-headers">Advanced Pattern (With Response Headers)<a class="headerlink" href="#advanced-pattern-with-response-headers" title="Anchor link to this section">&para;</a></h3>
 <p>Use the <code>body</code> tag wrapper when you need to include response headers:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">UserWithHeaders</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ETag</span><span class="w">         </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;ETag,location=header&quot;`</span>
-<span class="w">    </span><span class="nx">CacheControl</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;Cache-Control,location=header&quot;`</span>
-<span class="w">    </span><span class="nx">Body</span><span class="w">         </span><span class="nx">User</span><span class="w">   </span><span class="s">`body:&quot;structured&quot;`</span>
+<span class="w">    </span><span class="nx">ETag</span><span class="w">         </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"ETag,location=header"`</span>
+<span class="w">    </span><span class="nx">CacheControl</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"Cache-Control,location=header"`</span>
+<span class="w">    </span><span class="nx">Body</span><span class="w">         </span><span class="nx">User</span><span class="w">   </span><span class="s">`body:"structured"`</span>
 <span class="p">}</span>
 
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users/:id&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/users/:id"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">UserWithHeaders</span><span class="p">{}),</span><span class="w"> </span><span class="c1">// Includes headers</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -1461,18 +1461,18 @@
 <h3 id="custom-content-types">Custom Content Types<a class="headerlink" href="#custom-content-types" title="Anchor link to this section">&para;</a></h3>
 <p>By default, responses use <code>application/json</code>. To return a different content type, implement the <code>ContentTypeProvider</code> interface on your response struct:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">ProblemDetail</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Type</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;type&quot;`</span>
-<span class="w">    </span><span class="nx">Title</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;title&quot;`</span>
-<span class="w">    </span><span class="nx">Status</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;status&quot;`</span>
-<span class="w">    </span><span class="nx">Detail</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;detail&quot;`</span>
+<span class="w">    </span><span class="nx">Type</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"type"`</span>
+<span class="w">    </span><span class="nx">Title</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"title"`</span>
+<span class="w">    </span><span class="nx">Status</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"status"`</span>
+<span class="w">    </span><span class="nx">Detail</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"detail"`</span>
 <span class="p">}</span>
 
 <span class="c1">// ContentTypeProvider interface</span>
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">ProblemDetail</span><span class="p">)</span><span class="w"> </span><span class="nx">ContentType</span><span class="p">(</span><span class="nx">defaultType</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;application/problem+json&quot;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">"application/problem+json"</span>
 <span class="p">}</span>
 
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users/:id&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/users/:id"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="nx">ProblemDetail</span><span class="p">{}),</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -1487,7 +1487,7 @@
 <p>The method receives the default content type as a parameter, allowing conditional logic:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="nx">APIResponse</span><span class="p">)</span><span class="w"> </span><span class="nx">ContentType</span><span class="p">(</span><span class="nx">defaultType</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">IsError</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;application/problem+json&quot;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">"application/problem+json"</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">defaultType</span><span class="w"> </span><span class="c1">// Use default application/json</span>
 <span class="p">}</span>
@@ -1559,28 +1559,28 @@
 <h3 id="nested-structures">Nested Structures<a class="headerlink" href="#nested-structures" title="Anchor link to this section">&para;</a></h3>
 <p>Nested structs become nested schemas:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">    </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;name&quot;`</span>
-<span class="w">    </span><span class="nx">Address</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="s">`json:&quot;address&quot;`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">    </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:"name"`</span>
+<span class="w">    </span><span class="nx">Address</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="s">`json:"address"`</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Street</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;street&quot;`</span>
-<span class="w">    </span><span class="nx">City</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;city&quot;`</span>
+<span class="w">    </span><span class="nx">Street</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"street"`</span>
+<span class="w">    </span><span class="nx">City</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"city"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>The <code>Address</code> type becomes a reusable component referenced via <code>$ref</code>.</p>
 <h2 id="component-reuse">Component Reuse<a class="headerlink" href="#component-reuse" title="Anchor link to this section">&para;</a></h2>
 <p>Types used in multiple places are generated once:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;id&quot;`</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"id"`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name"`</span>
 <span class="p">}</span>
 
 <span class="c1">// User appears in both operations</span>
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
 <span class="p">),</span>
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users/:id&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/users/:id"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -1589,12 +1589,12 @@
 <p>Choose your target version:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// OpenAPI 3.0.4 (maximum compatibility)</span>
 <span class="nx">api</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">NewAPI</span><span class="p">(</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithVersion</span><span class="p">(</span><span class="s">&quot;3.0.4&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithVersion</span><span class="p">(</span><span class="s">"3.0.4"</span><span class="p">),</span>
 <span class="p">)</span>
 
 <span class="c1">// OpenAPI 3.1.2 (modern features)</span>
 <span class="nx">api</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">NewAPI</span><span class="p">(</span>
-<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithVersion</span><span class="p">(</span><span class="s">&quot;3.1.2&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithVersion</span><span class="p">(</span><span class="s">"3.1.2"</span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
 <p>Learn more: <a href="../../guides/versions/">OpenAPI Versions</a></p>
@@ -1722,10 +1722,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       

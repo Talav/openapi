@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1248,62 +1248,62 @@ Examples are defined explicitly:</p>
 <p>Define examples using the <code>openapi</code> tag:</p>
 <h3 id="single-example">Single Example<a class="headerlink" href="#single-example" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot; openapi:&quot;examples=John Doe&quot;`</span>
-<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;email&quot; openapi:&quot;examples=john@example.com&quot;`</span>
-<span class="w">    </span><span class="nx">Age</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;age&quot; openapi:&quot;examples=30&quot;`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"name" openapi:"examples=John Doe"`</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:"email" openapi:"examples=john@example.com"`</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:"age" openapi:"examples=30"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="multiple-examples">Multiple Examples<a class="headerlink" href="#multiple-examples" title="Anchor link to this section">&para;</a></h3>
 <p>Separate examples with <code>|</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Product</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;name&quot; openapi:&quot;examples=Widget|Gadget|Tool&quot;`</span>
-<span class="w">    </span><span class="nx">Price</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;price&quot; openapi:&quot;examples=9.99|19.99|29.99&quot;`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:"name" openapi:"examples=Widget|Gadget|Tool"`</span>
+<span class="w">    </span><span class="nx">Price</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:"price" openapi:"examples=9.99|19.99|29.99"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>The first example is used as the default.</p>
 <h2 id="operation-level-examples">Operation-Level Examples<a class="headerlink" href="#operation-level-examples" title="Anchor link to this section">&para;</a></h2>
 <p>Add examples to entire requests/responses:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/talav/openapi/example&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">"github.com/talav/openapi/example"</span>
 
 <span class="c1">// Create example instance</span>
-<span class="nx">userExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;john_doe&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;Example user&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithDescription</span><span class="p">(</span><span class="s">&quot;A typical user account&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w">    </span><span class="mi">42</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;John Doe&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;john@example.com&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;role&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;admin&quot;</span><span class="p">,</span>
+<span class="nx">userExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">"john_doe"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"Example user"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithDescription</span><span class="p">(</span><span class="s">"A typical user account"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">        </span><span class="s">"id"</span><span class="p">:</span><span class="w">    </span><span class="mi">42</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"name"</span><span class="p">:</span><span class="w">  </span><span class="s">"John Doe"</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"email"</span><span class="p">:</span><span class="w"> </span><span class="s">"john@example.com"</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"role"</span><span class="p">:</span><span class="w">  </span><span class="s">"admin"</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}),</span>
 <span class="p">)</span>
 
 <span class="c1">// Apply to operation</span>
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">CreateUserRequest</span><span class="p">{}),</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequestExample</span><span class="p">(</span><span class="nx">userExample</span><span class="p">),</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
 <span class="p">)</span>
 </code></pre></div>
 <h3 id="multiple-request-examples">Multiple Request Examples<a class="headerlink" href="#multiple-request-examples" title="Anchor link to this section">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">adminExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;admin_user&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;Admin user&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;Admin User&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;admin@example.com&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;role&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;admin&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">adminExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">"admin_user"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"Admin user"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">        </span><span class="s">"name"</span><span class="p">:</span><span class="w">  </span><span class="s">"Admin User"</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"email"</span><span class="p">:</span><span class="w"> </span><span class="s">"admin@example.com"</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"role"</span><span class="p">:</span><span class="w">  </span><span class="s">"admin"</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}),</span>
 <span class="p">)</span>
 
-<span class="nx">regularExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;regular_user&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;Regular user&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;Regular User&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;user@example.com&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;role&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;user&quot;</span><span class="p">,</span>
+<span class="nx">regularExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">"regular_user"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"Regular user"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">        </span><span class="s">"name"</span><span class="p">:</span><span class="w">  </span><span class="s">"Regular User"</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"email"</span><span class="p">:</span><span class="w"> </span><span class="s">"user@example.com"</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"role"</span><span class="p">:</span><span class="w">  </span><span class="s">"user"</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}),</span>
 <span class="p">)</span>
 
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">CreateUserRequest</span><span class="p">{}),</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequestExample</span><span class="p">(</span><span class="nx">adminExample</span><span class="p">),</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequestExample</span><span class="p">(</span><span class="nx">regularExample</span><span class="p">),</span>
@@ -1312,17 +1312,17 @@ Examples are defined explicitly:</p>
 </code></pre></div>
 <h2 id="response-examples">Response Examples<a class="headerlink" href="#response-examples" title="Anchor link to this section">&para;</a></h2>
 <h3 id="success-example">Success Example<a class="headerlink" href="#success-example" title="Anchor link to this section">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">successExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;success&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;Successful creation&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w">         </span><span class="mi">123</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w">       </span><span class="s">&quot;New User&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="w">      </span><span class="s">&quot;user@example.com&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2024-03-15T10:30:00Z&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">successExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">"success"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"Successful creation"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">        </span><span class="s">"id"</span><span class="p">:</span><span class="w">         </span><span class="mi">123</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"name"</span><span class="p">:</span><span class="w">       </span><span class="s">"New User"</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"email"</span><span class="p">:</span><span class="w">      </span><span class="s">"user@example.com"</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s">"2024-03-15T10:30:00Z"</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}),</span>
 <span class="p">)</span>
 
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">CreateUserRequest</span><span class="p">{}),</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{},</span>
 <span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponseExample</span><span class="p">(</span><span class="nx">successExample</span><span class="p">),</span>
@@ -1330,26 +1330,26 @@ Examples are defined explicitly:</p>
 <span class="p">)</span>
 </code></pre></div>
 <h3 id="error-examples">Error Examples<a class="headerlink" href="#error-examples" title="Anchor link to this section">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">notFoundExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;not_found&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;User not found&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;not_found&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;User with ID 999 does not exist&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nx">notFoundExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">"not_found"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"User not found"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">        </span><span class="s">"error"</span><span class="p">:</span><span class="w">   </span><span class="s">"not_found"</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"message"</span><span class="p">:</span><span class="w"> </span><span class="s">"User with ID 999 does not exist"</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}),</span>
 <span class="p">)</span>
 
-<span class="nx">validationExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;validation_error&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;Validation failed&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;validation_failed&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
-<span class="w">            </span><span class="p">{</span><span class="s">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;invalid email format&quot;</span><span class="p">},</span>
-<span class="w">            </span><span class="p">{</span><span class="s">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;must be at least 18&quot;</span><span class="p">},</span>
+<span class="nx">validationExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">"validation_error"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"Validation failed"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">        </span><span class="s">"error"</span><span class="p">:</span><span class="w"> </span><span class="s">"validation_failed"</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">            </span><span class="p">{</span><span class="s">"field"</span><span class="p">:</span><span class="w"> </span><span class="s">"email"</span><span class="p">,</span><span class="w"> </span><span class="s">"message"</span><span class="p">:</span><span class="w"> </span><span class="s">"invalid email format"</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="s">"field"</span><span class="p">:</span><span class="w"> </span><span class="s">"age"</span><span class="p">,</span><span class="w"> </span><span class="s">"message"</span><span class="p">:</span><span class="w"> </span><span class="s">"must be at least 18"</span><span class="p">},</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">}),</span>
 <span class="p">)</span>
 
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">CreateUserRequest</span><span class="p">{}),</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{}),</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nx">Error</span><span class="p">{},</span>
@@ -1363,39 +1363,39 @@ Examples are defined explicitly:</p>
 <h2 id="complex-examples">Complex Examples<a class="headerlink" href="#complex-examples" title="Anchor link to this section">&para;</a></h2>
 <h3 id="nested-structures">Nested Structures<a class="headerlink" href="#nested-structures" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Order</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ID</span><span class="w">    </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:&quot;id&quot;`</span>
-<span class="w">    </span><span class="nx">Items</span><span class="w"> </span><span class="p">[]</span><span class="nx">Item</span><span class="w">  </span><span class="s">`json:&quot;items&quot;`</span>
-<span class="w">    </span><span class="nx">User</span><span class="w">  </span><span class="nx">User</span><span class="w">    </span><span class="s">`json:&quot;user&quot;`</span>
-<span class="w">    </span><span class="nx">Total</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;total&quot;`</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">    </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:"id"`</span>
+<span class="w">    </span><span class="nx">Items</span><span class="w"> </span><span class="p">[]</span><span class="nx">Item</span><span class="w">  </span><span class="s">`json:"items"`</span>
+<span class="w">    </span><span class="nx">User</span><span class="w">  </span><span class="nx">User</span><span class="w">    </span><span class="s">`json:"user"`</span>
+<span class="w">    </span><span class="nx">Total</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:"total"`</span>
 <span class="p">}</span>
 
-<span class="nx">orderExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;sample_order&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">789</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">            </span><span class="p">{</span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Widget&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">9.99</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span>
-<span class="w">            </span><span class="p">{</span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Gadget&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">19.99</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="nx">orderExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">"sample_order"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">        </span><span class="s">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">789</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">            </span><span class="p">{</span><span class="s">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"name"</span><span class="p">:</span><span class="w"> </span><span class="s">"Widget"</span><span class="p">,</span><span class="w"> </span><span class="s">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.99</span><span class="p">,</span><span class="w"> </span><span class="s">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="s">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">"name"</span><span class="p">:</span><span class="w"> </span><span class="s">"Gadget"</span><span class="p">,</span><span class="w"> </span><span class="s">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">19.99</span><span class="p">,</span><span class="w"> </span><span class="s">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
 <span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="s">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w">    </span><span class="mi">42</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;John Doe&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;john@example.com&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"user"</span><span class="p">:</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"id"</span><span class="p">:</span><span class="w">    </span><span class="mi">42</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"name"</span><span class="p">:</span><span class="w">  </span><span class="s">"John Doe"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"email"</span><span class="p">:</span><span class="w"> </span><span class="s">"john@example.com"</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="s">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">39.97</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">39.97</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}),</span>
 <span class="p">)</span>
 </code></pre></div>
 <h3 id="arrays">Arrays<a class="headerlink" href="#arrays" title="Anchor link to this section">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">usersExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;user_list&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;List of users&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">([]</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;alice@example.com&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Bob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;bob@example.com&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Charlie&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;charlie@example.com&quot;</span><span class="p">},</span>
+<div class="highlight"><pre><span></span><code><span class="nx">usersExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">"user_list"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"List of users"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">([]</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="s">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"name"</span><span class="p">:</span><span class="w"> </span><span class="s">"Alice"</span><span class="p">,</span><span class="w"> </span><span class="s">"email"</span><span class="p">:</span><span class="w"> </span><span class="s">"alice@example.com"</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">"name"</span><span class="p">:</span><span class="w"> </span><span class="s">"Bob"</span><span class="p">,</span><span class="w"> </span><span class="s">"email"</span><span class="p">:</span><span class="w"> </span><span class="s">"bob@example.com"</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s">"name"</span><span class="p">:</span><span class="w"> </span><span class="s">"Charlie"</span><span class="p">,</span><span class="w"> </span><span class="s">"email"</span><span class="p">:</span><span class="w"> </span><span class="s">"charlie@example.com"</span><span class="p">},</span>
 <span class="w">    </span><span class="p">}),</span>
 <span class="p">)</span>
 
-<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="nx">openapi</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="p">[]</span><span class="nx">User</span><span class="p">{},</span>
 <span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponseExample</span><span class="p">(</span><span class="nx">usersExample</span><span class="p">),</span>
 <span class="w">    </span><span class="p">),</span>
@@ -1404,67 +1404,67 @@ Examples are defined explicitly:</p>
 <h2 id="parameter-examples">Parameter Examples<a class="headerlink" href="#parameter-examples" title="Anchor link to this section">&para;</a></h2>
 <p>Examples for query/path/header parameters:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">SearchRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Query</span><span class="w">    </span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:&quot;q&quot; openapi:&quot;examples=golang|kubernetes|docker&quot;`</span>
-<span class="w">    </span><span class="nx">Category</span><span class="w"> </span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:&quot;category&quot; openapi:&quot;examples=tutorial|reference&quot;`</span>
-<span class="w">    </span><span class="nx">Tags</span><span class="w">     </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;tags&quot; openapi:&quot;examples=beginner|advanced&quot;`</span>
-<span class="w">    </span><span class="nx">Page</span><span class="w">     </span><span class="kt">int</span><span class="w">      </span><span class="s">`schema:&quot;page&quot; default:&quot;1&quot; openapi:&quot;examples=1|2|5&quot;`</span>
+<span class="w">    </span><span class="nx">Query</span><span class="w">    </span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:"q" openapi:"examples=golang|kubernetes|docker"`</span>
+<span class="w">    </span><span class="nx">Category</span><span class="w"> </span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:"category" openapi:"examples=tutorial|reference"`</span>
+<span class="w">    </span><span class="nx">Tags</span><span class="w">     </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"tags" openapi:"examples=beginner|advanced"`</span>
+<span class="w">    </span><span class="nx">Page</span><span class="w">     </span><span class="kt">int</span><span class="w">      </span><span class="s">`schema:"page" default:"1" openapi:"examples=1|2|5"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="external-examples">External Examples<a class="headerlink" href="#external-examples" title="Anchor link to this section">&para;</a></h2>
 <p>Reference examples from external URLs:</p>
-<div class="highlight"><pre><span></span><code><span class="nx">externalExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;external_user&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;User from external source&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithExternalValue</span><span class="p">(</span><span class="s">&quot;https://example.com/examples/user.json&quot;</span><span class="p">),</span>
+<div class="highlight"><pre><span></span><code><span class="nx">externalExample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">"external_user"</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"User from external source"</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithExternalValue</span><span class="p">(</span><span class="s">"https://example.com/examples/user.json"</span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
 <h2 id="complete-example">Complete Example<a class="headerlink" href="#complete-example" title="Anchor link to this section">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;context&quot;</span>
-<span class="w">    </span><span class="s">&quot;github.com/talav/openapi&quot;</span>
-<span class="w">    </span><span class="s">&quot;github.com/talav/openapi/example&quot;</span>
+<span class="w">    </span><span class="s">"context"</span>
+<span class="w">    </span><span class="s">"github.com/talav/openapi"</span>
+<span class="w">    </span><span class="s">"github.com/talav/openapi/example"</span>
 <span class="p">)</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">api</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">NewAPI</span><span class="p">(</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoTitle</span><span class="p">(</span><span class="s">&quot;User API&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoVersion</span><span class="p">(</span><span class="s">&quot;1.0.0&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoTitle</span><span class="p">(</span><span class="s">"User API"</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithInfoVersion</span><span class="p">(</span><span class="s">"1.0.0"</span><span class="p">),</span>
 <span class="w">    </span><span class="p">)</span>
 
 <span class="w">    </span><span class="c1">// Success examples</span>
-<span class="w">    </span><span class="nx">userCreated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;user_created&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;Successfully created user&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w">         </span><span class="mi">123</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w">       </span><span class="s">&quot;Alice Johnson&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="w">      </span><span class="s">&quot;alice@company.com&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;role&quot;</span><span class="p">:</span><span class="w">       </span><span class="s">&quot;user&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2024-03-15T10:30:00Z&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">userCreated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">"user_created"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"Successfully created user"</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"id"</span><span class="p">:</span><span class="w">         </span><span class="mi">123</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"name"</span><span class="p">:</span><span class="w">       </span><span class="s">"Alice Johnson"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"email"</span><span class="p">:</span><span class="w">      </span><span class="s">"alice@company.com"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"role"</span><span class="p">:</span><span class="w">       </span><span class="s">"user"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s">"2024-03-15T10:30:00Z"</span><span class="p">,</span>
 <span class="w">        </span><span class="p">}),</span>
 <span class="w">    </span><span class="p">)</span>
 
 <span class="w">    </span><span class="c1">// Error examples</span>
-<span class="w">    </span><span class="nx">invalidEmail</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;invalid_email&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;Invalid email format&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;validation_error&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;email must be a valid email address&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;field&quot;</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;email&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">invalidEmail</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">"invalid_email"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"Invalid email format"</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"error"</span><span class="p">:</span><span class="w">   </span><span class="s">"validation_error"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"message"</span><span class="p">:</span><span class="w"> </span><span class="s">"email must be a valid email address"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"field"</span><span class="p">:</span><span class="w">   </span><span class="s">"email"</span><span class="p">,</span>
 <span class="w">        </span><span class="p">}),</span>
 <span class="w">    </span><span class="p">)</span>
 
-<span class="w">    </span><span class="nx">duplicateEmail</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;duplicate_email&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">&quot;Email already registered&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;conflict&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;A user with this email already exists&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;field&quot;</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;email&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">duplicateEmail</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">example</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">"duplicate_email"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithSummary</span><span class="p">(</span><span class="s">"Email already registered"</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">example</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"error"</span><span class="p">:</span><span class="w">   </span><span class="s">"conflict"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"message"</span><span class="p">:</span><span class="w"> </span><span class="s">"A user with this email already exists"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"field"</span><span class="p">:</span><span class="w">   </span><span class="s">"email"</span><span class="p">,</span>
 <span class="w">        </span><span class="p">}),</span>
 <span class="w">    </span><span class="p">)</span>
 
 <span class="w">    </span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">api</span><span class="p">.</span><span class="nx">Generate</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span>
-<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">"/users"</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithRequest</span><span class="p">(</span><span class="nx">CreateUserRequest</span><span class="p">{}),</span>
 <span class="w">            </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponse</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nx">User</span><span class="p">{},</span>
 <span class="w">                </span><span class="nx">openapi</span><span class="p">.</span><span class="nx">WithResponseExample</span><span class="p">(</span><span class="nx">userCreated</span><span class="p">),</span>
@@ -1602,10 +1602,10 @@ Examples are defined explicitly:</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       
