@@ -211,6 +211,22 @@ func TestParseValidateTag(t *testing.T) {
 			},
 		},
 		{
+			name:      "built-in validator without an OpenAPI equivalent is skipped",
+			fieldName: "Website",
+			tagValue:  "omitempty,url",
+			want: &ValidateMetadata{
+				Format: "uri",
+			},
+		},
+		{
+			name:      "custom validator is skipped",
+			fieldName: "Secret",
+			tagValue:  "required,password",
+			want: &ValidateMetadata{
+				Required: boolPtr(true),
+			},
+		},
+		{
 			name:        "invalid tag parsing",
 			fieldName:   "Field",
 			tagValue:    "required,'unclosed quote",

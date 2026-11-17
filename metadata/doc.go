@@ -16,8 +16,9 @@
 //
 // 2. Validation Constraints (validate tag):
 //   - Numeric: min, max, gt, gte, lt, lte, multipleOf
-//   - String: pattern, email, url, uuid, etc.
+//   - String: pattern, email, url, alpha, alphanum
 //   - General: required, enum (oneof)
+//   - Validators with no OpenAPI equivalent, including custom ones, are skipped
 //
 // 3. Specialized Tags:
 //   - default: Default values for fields

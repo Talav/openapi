@@ -306,6 +306,19 @@ In OpenAPI 3.1, this uses `dependentRequired`:
 }
 ```
 
+## Validators Without an OpenAPI Equivalent
+
+Only validators that map to an OpenAPI keyword appear in the schema. Any other validator is skipped: built-in ones such as `omitempty`, `uuid`, `dive` or `required_if`, and custom validators you register yourself. They still run at validation time; they are just not described in the document.
+
+```go
+type Signup struct {
+    Email    string `json:"email" validate:"omitempty,email"`      // format: email
+    Password string `json:"password" validate:"required,password"` // required; "password" is skipped
+}
+```
+
+A mapped validator with an invalid value, such as `min=abc`, is still an error.
+
 ## Next Steps
 
 - [Metadata](metadata.md) - Add descriptions, examples, and more

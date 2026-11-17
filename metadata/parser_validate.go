@@ -48,7 +48,7 @@ type ValidateMetadata struct {
 //   - url -> Format="uri"
 //   - pattern=... -> Pattern="..."
 //   - oneof=... -> Enum="[...]"
-//   - etc.
+//   - anything else (omitempty, uuid, custom validators, ...) -> skipped
 func ParseValidateTag(field reflect.StructField, index int, tagValue string) (any, error) {
 	vm := &ValidateMetadata{}
 
@@ -83,7 +83,7 @@ func ParseValidateTag(field reflect.StructField, index int, tagValue string) (an
 }
 
 // applyValidatorMapping maps a single validator tag to OpenAPI constraint.
-// Only includes validators actually supported by go-playground/validator v10.
+// Validators with no OpenAPI equivalent, including custom ones, are skipped.
 // Reference: https://pkg.go.dev/github.com/go-playground/validator/v10
 //
 //nolint:cyclop // Map-based dispatch - acceptable complexity
@@ -180,5 +180,6 @@ func applyValidatorMapping(vm *ValidateMetadata, validator, value string) error 
 		return nil
 	}
 
-	return fmt.Errorf("unsupported validator %q (see go-playground/validator v10 docs)", validator)
+	// No OpenAPI equivalent (omitempty, uuid, dive, custom validators, ...): leave it out of the schema.
+	return nil
 }
