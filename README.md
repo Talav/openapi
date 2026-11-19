@@ -2,7 +2,6 @@
 
 [![tag](https://img.shields.io/github/tag/talav/openapi.svg)](https://github.com/talav/openapi/tags)
 [![Go Reference](https://pkg.go.dev/badge/github.com/talav/openapi.svg)](https://pkg.go.dev/github.com/talav/openapi)
-[![Go Report Card](https://goreportcard.com/badge/github.com/talav/openapi)](https://goreportcard.com/report/github.com/talav/openapi)
 [![CI](https://github.com/talav/openapi/actions/workflows/openapi-ci.yml/badge.svg)](https://github.com/talav/openapi/actions)
 [![codecov](https://codecov.io/gh/talav/openapi/graph/badge.svg)](https://codecov.io/gh/talav/openapi)
 [![License](https://img.shields.io/github/license/talav/openapi)](./LICENSE)
